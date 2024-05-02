@@ -1,0 +1,79 @@
+import { CustomLogger, Logger } from '@providers/logger.provider';
+import { {{pascalCase name}} } from '@servers/{{kebabCase server}}/{{kebabCase name}}/{{kebabCase name}}.interface';
+import { Prisma } from '@prisma/client';
+import { repositories } from '@repositories/index.repository';
+import { {{pascalCase name}}PublicSelect, {{pascalCase name}}WithPublicFields } from '@repositories/{{kebabCase name}}.repository';
+import { Pagination } from '@utils/pagination.util';
+
+export class {{pascalCase name}}Service {
+  @Logger()
+  private readonly logger: CustomLogger;
+
+  async create(params: {{pascalCase name}}.CreateParams) {
+    const {} = params;
+
+    return repositories.{{camelCase name}}.create<{{pascalCase name}}PublicSelect>({
+      select: {{pascalCase name}}PublicSelect,
+      data: {} as Prisma.{{pascalCase name}}CreateInput,
+    });
+  }
+
+  async list(params: {{pascalCase name}}.ListParams) {
+    const { page, limit, account } = params;
+
+    const AND: Prisma.Enumerable<Prisma.{{pascalCase name}}WhereInput> = [];
+    let where: Prisma.{{pascalCase name}}WhereInput = {};
+    where = {
+      ...where,
+      AND,
+    };
+    const total = await repositories.{{camelCase name}}.count({ where });
+    const items = await repositories.{{camelCase name}}.findMany<{{pascalCase name}}PublicSelect>({
+      select: {{pascalCase name}}PublicSelect,
+      skip: (page - 1) * limit,
+      take: limit,
+      where,
+    });
+
+    return {
+      items,
+      pagination: new Pagination({
+        page,
+        limit,
+        total,
+      }),
+    };
+  }
+
+  async findOne(params: {{pascalCase name}}.FindOneParams) {
+    const { ID, account } = params;
+
+    return repositories.{{camelCase name}}.findFirst<{{pascalCase name}}PublicSelect>({
+      select: {{pascalCase name}}PublicSelect,
+      where: {
+        ID,
+      },
+    });
+  }
+
+  async update(params: {{pascalCase name}}.UpdateParams) {
+    const { ID, account } = params;
+
+    return repositories.{{camelCase name}}.update<{{pascalCase name}}PublicSelect>({
+      select: {{pascalCase name}}PublicSelect,
+      data: {},
+      where: {
+        ID,
+      },
+    });
+  }
+
+  async delete(params: {{pascalCase name}}.DeleteParams) {
+    const { ID, account } = params;
+    return repositories.{{camelCase name}}.delete({
+      where: {
+        ID,
+      },
+    });
+  }
+}

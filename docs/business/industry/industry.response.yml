@@ -1,0 +1,80 @@
+components:
+  responses:
+    CheckResponse:
+      type: object
+      description: Check Response
+      summary: Successfully checked for email availability
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  isAvailable:
+                    type: boolean
+              metadata:
+                type: object
+                $ref: "../../metadata.schema.yml#/components/schemas/Metadata"
+
+    SigninResponse:
+      type: object
+      description: Successfully Signed In
+      summary: Successfully Signed In
+      headers:
+        x-token:
+          schema:
+            type: string
+          description: Bearer token when type url parameters is 'bearer'
+        Set-Cookie:
+          description: >
+            Contains the session cookie named `Backend-Starter-<Environment>`.
+            Pass this cookie back in subsequent requests.
+          schema:
+            type: string
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                $ref: "./account.schema.yml#/components/schemas/Account"
+              metadata:
+                type: object
+                $ref: "../../metadata.schema.yml#/components/schemas/Metadata"
+    Single:
+      type: object
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                $ref: "./account.schema.yml#/components/schemas/Account"
+              metadata:
+                type: object
+                $ref: "../../../metadata.schema.yml#/components/schemas/Metadata"
+    Paginated:
+      type: object
+      description: Paginated List of Accounts
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    $ref: "./account.schema.yml#/components/schemas/Account"
+                  pagination:
+                    type: object
+                    $ref: "../../pagination.model.yml#/components/schemas/Pagination"
+              metadata:
+                type: object
+                $ref: "../../../metadata.schema.yml#/components/schemas/Metadata"

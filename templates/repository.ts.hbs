@@ -1,0 +1,100 @@
+import { {{pascalCase name}}, Prisma } from '@prisma/client';
+import { GetResult } from '@prisma/client/runtime/library';
+import { database } from '@providers/database.provider';
+
+const fields = {
+  ID: true,
+  createdAt: true,
+  updatedAt: true,
+} satisfies Prisma.{{pascalCase name}}Select;
+
+export const {{pascalCase name}}PublicSelect = fields;
+export type {{pascalCase name}}PublicSelect = typeof {{pascalCase name}}PublicSelect;
+
+export type {{pascalCase name}}WithPublicFields = Prisma.{{pascalCase name}}GetPayload<{
+  select: typeof {{pascalCase name}}PublicSelect;
+}>;
+
+export const {{pascalCase name}}PrivateSelect = { ...fields } satisfies Prisma.{{pascalCase name}}Select;
+export type {{pascalCase name}}PrivateSelect = typeof {{pascalCase name}}PrivateSelect;
+
+export type {{pascalCase name}}WithPrivateFields = Prisma.{{pascalCase name}}GetPayload<{
+  select: typeof {{pascalCase name}}PrivateSelect;
+}>;
+
+type CustomReturnType<T extends Prisma.{{pascalCase name}}FindFirstArgs['select']> =
+  T extends {{pascalCase name}}PrivateSelect
+    ? {{pascalCase name}}WithPrivateFields
+    : T extends {{pascalCase name}}PublicSelect
+    ? {{pascalCase name}}WithPublicFields
+    : {{pascalCase name}};
+
+export class {{pascalCase name}}Repository {
+  aggregate(params: Prisma.{{pascalCase name}}AggregateArgs, connection: Prisma.TransactionClient = database.read) {
+    return connection.{{camelCase name}}.aggregate(params);
+  }
+
+  upsert<T>(
+    params: Prisma.{{pascalCase name}}UpsertArgs,
+    connection: Prisma.TransactionClient = database.write
+  ): Promise<GetResult<CustomReturnType<T>, null>> {
+    return connection.{{camelCase name}}.upsert(params) as unknown as Promise<
+      GetResult<CustomReturnType<T>, null>
+    >;
+  }
+
+  create<T>(
+    params: Omit<Prisma.{{pascalCase name}}CreateArgs, 'data'> & {
+      data?: Omit<Prisma.{{pascalCase name}}CreateInput, 'ID'> & { ID?: string };
+    },
+    connection: Prisma.TransactionClient = database.write
+  ): Promise<GetResult<CustomReturnType<T>, null>> {
+    return connection.{{camelCase name}}.create(
+      params as Prisma.{{pascalCase name}}CreateArgs
+    ) as unknown as Promise<GetResult<CustomReturnType<T>, null>>;
+  }
+
+  createMany<T>(
+    params: Omit<Prisma.{{pascalCase name}}CreateManyArgs, 'data'> & {
+      data?: Array<Omit<Prisma.{{pascalCase name}}CreateManyInput, 'ID'> & { ID?: string }>;
+    },
+    connection: Prisma.TransactionClient = database.write
+  ): Promise<GetResult<Array<CustomReturnType<T>>, null>> {
+    return connection.{{camelCase name}}.createMany(
+      params as Prisma.{{pascalCase name}}CreateManyArgs
+    ) as unknown as Promise<GetResult<Array<CustomReturnType<T>>, null>>;
+  }
+
+  findFirst<T>(params: Prisma.{{pascalCase name}}FindFirstArgs, connection: Prisma.TransactionClient = database.read): Promise<GetResult<CustomReturnType<T>, null>> {
+    return connection.{{camelCase name}}.findFirst(params) as unknown as Promise<
+      GetResult<CustomReturnType<T>, null>
+    >;
+  }
+
+  findMany<T>(
+    params: Prisma.{{pascalCase name}}FindManyArgs,
+    connection: Prisma.TransactionClient = database.read
+  ): Promise<GetResult<Array<CustomReturnType<T>>, null>> {
+    return connection.{{camelCase name}}.findMany(params) as unknown as Promise<
+      GetResult<Array<CustomReturnType<T>>, null>
+    >;
+  }
+
+  count(params: Prisma.{{pascalCase name}}CountArgs, connection: Prisma.TransactionClient = database.read) {
+    return connection.{{camelCase name}}.count(params);
+  }
+
+  update<T>(params: Prisma.{{pascalCase name}}UpdateArgs, connection: Prisma.TransactionClient = database.write): Promise<GetResult<CustomReturnType<T>, null>> {
+    return connection.{{camelCase name}}.update(params) as unknown as Promise<
+      GetResult<CustomReturnType<T>, null>
+    >;
+  }
+
+  delete(params: Prisma.{{pascalCase name}}DeleteArgs, connection: Prisma.TransactionClient = database.write) {
+    return connection.{{camelCase name}}.delete(params);
+  }
+
+  deleteMany(params: Prisma.{{pascalCase name}}DeleteManyArgs, connection: Prisma.TransactionClient = database.write) {
+    return connection.{{camelCase name}}.deleteMany(params);
+  }
+}

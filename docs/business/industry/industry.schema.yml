@@ -1,0 +1,15 @@
+components:
+  schemas:
+    Account:
+      type: object
+      properties:
+        ID:
+          type: string
+        code:
+          type: string
+        name:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string

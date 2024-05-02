@@ -1,0 +1,41 @@
+openapi: 3.0.0
+info:
+  title: Public API
+  description:
+  version: 1.0.0
+servers:
+  - url: http://localhost:5003/v1
+    description: Local Development Server
+    variables:
+      basePath:
+        default: v1
+  - url: https://flickpost.co
+    description: Staging Server
+    variables:
+      basePath:
+        default: v1
+  - url: https://flickpost.co
+    description: Production Server
+    variables:
+      basePath:
+        default: v1
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: apiKey
+      name: Bearer
+      in: header
+
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: Consumer
+
+security:
+  - bearerAuth: []
+  - cookieAuth: []
+
+paths:
+  /track:
+    $ref: "../account/account.doc.yml#/components/Check"

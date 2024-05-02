@@ -1,0 +1,13 @@
+import { AccountController } from '@servers/{{kebabCase server}}/account/account.controller';
+import { ProfileController } from '@servers/{{kebabCase server}}/profile/profile.controller';
+import { PreferenceController } from '@servers/{{kebabCase server}}/preference/preference.controller';
+import { DeviceTokenController } from '@servers/{{kebabCase server}}/device-token/device-token.controller';
+import { HealthcheckController } from '@servers/{{kebabCase server}}/healthcheck/healthcheck.controller';
+
+export const controllers = [
+  HealthcheckController,
+  AccountController,
+  ProfileController,
+  PreferenceController,
+  DeviceTokenController,
+];

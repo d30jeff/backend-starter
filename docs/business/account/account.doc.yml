@@ -1,0 +1,37 @@
+components:
+  Check:
+    get:
+      summary: Check
+      description: Checks Account availability based on given email
+      tags:
+        - "Account"
+      operationId: "get/account/check"
+      responses:
+        "200":
+          $ref: "./account.response.yml#/components/responses/CheckResponse"
+        "400":
+          $ref: "../../error.schema.yml#/components/responses/ValidationError"
+        "500":
+          $ref: "../../error.schema.yml#/components/responses/InternalServerError"
+
+  Signup:
+    post:
+      summary: Login
+      description: Creates session based on given credentials
+      tags:
+        - "Account"
+      operationId: "post/account"
+      requestBody:
+        description: Payload for Signing In
+        # required: true
+        # content:
+        #   application/json:
+        #     schema:
+        #       $ref: "./payloads/account.payload.yml#/components/schemas/Account"
+      responses:
+        "200":
+          $ref: "./account.response.yml#/components/responses/SigninResponse"
+        "400":
+          $ref: "../../error.schema.yml#/components/responses/ValidationError"
+        "500":
+          $ref: "../../error.schema.yml#/components/responses/InternalServerError"

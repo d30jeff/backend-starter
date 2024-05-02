@@ -1,0 +1,22 @@
+module.exports = {
+  apps: [
+    {
+      name: 'Admin API',
+      script: 'yarn',
+      args: 'admin-api:dev',
+      interpreter: '/bin/bash',
+    },
+    {
+      name: 'Consumer API',
+      script: 'yarn',
+      args: 'consumer-api:dev',
+      interpreter: '/bin/bash',
+    },
+    {
+      name: 'Public API',
+      script: 'yarn',
+      args: 'public-api:dev',
+      interpreter: '/bin/bash',
+    },
+  ],
+};

@@ -1,0 +1,14 @@
+import { CustomLogger, Logger } from '@providers/logger.provider';
+import {
+  Create{{pascalCase name}}Params,
+  List{{pascalCase name}}Params,
+  FindOne{{pascalCase name}}Params,
+  Update{{pascalCase name}}Params,
+  Delete{{pascalCase name}}Params,
+} from '@servers/{{kebabCase server}}/{{kebabCase name}}/{{kebabCase name}}.interface';
+
+export class {{pascalCase name}}Service {
+  @Logger()
+  private readonly logger: CustomLogger;
+
+}

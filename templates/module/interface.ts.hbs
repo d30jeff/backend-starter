@@ -1,0 +1,19 @@
+import { Create{{pascalCase name}}Dto } from '@servers/{{kebabCase server}}/{{kebabCase name}}/{{kebabCase name}}.dto';
+import { PaginationQueries } from '@utils/pagination.util';
+import { Account } from '@shared/modules/account/account.interface';
+
+export namespace {{pascalCase name}} {
+  export type CreateParams = Create{{pascalCase name}}Dto & Account.Session;
+
+  export type ListParams = PaginationQueries & Account.Session;
+
+  export type FindOneParams = {
+    ID: string;
+  } & Account.Session;
+
+  export type UpdateParams = CreateParams & FindOneParams &
+  Account.Session;
+
+  export type DeleteParams = FindOneParams & Account.Session;
+
+}

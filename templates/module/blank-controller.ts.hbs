@@ -1,0 +1,107 @@
+import { serializePaginationParams } from '@utils/pagination.util';
+import {
+  ExpressNextFunction,
+  ExpressRequest,
+  ExpressResponse,
+} from '@interfaces/express.interface';
+import {
+  Controller,
+  Delete,
+  Get,
+  Next,
+  Params,
+  Post,
+  Put,
+  Request,
+  Response,
+} from '@decorators/express';
+import { Create{{pascalCase name}}Dto, Update{{pascalCase name}}Dto } from '@servers/{{kebabCase server}}/{{kebabCase name}}/{{kebabCase name}}.dto';
+import { {{pascalCase name}}Response } from '@servers/{{kebabCase server}}/{{kebabCase name}}/{{kebabCase name}}.response';
+import { CustomLogger, Logger } from '@providers/logger.provider';
+import { validate } from '@utils/class-validator.util';
+import { services } from '@servers/{{kebabCase server}}/{{kebabCase server}}.services';
+import { HttpStatus } from '@enums/http-status.enum';
+
+@Controller('/')
+export class {{pascalCase name}}Controller {
+  @Logger()
+  private readonly logger: CustomLogger;
+
+  @Post('/')
+  async create(
+    @Request() request: ExpressRequest,
+    @Response() response: ExpressResponse,
+    @Next() next: ExpressNextFunction
+  ) {
+    try {
+      const body = await validate<Create{{pascalCase name}}Dto>(Create{{pascalCase name}}Dto, request.body);
+      return response.status(HttpStatus.Created).json(body);
+    } catch (error) {
+      this.logger.fatal(error);
+      next(error);
+    }
+  }
+
+  @Get('/')
+  async list(
+    @Request() request: ExpressRequest,
+    @Response() response: ExpressResponse,
+    @Next() next: ExpressNextFunction
+  ) {
+    try {
+      const { page, limit } = serializePaginationParams(request);
+
+      return response.status(HttpStatus.Ok).json(null);
+    } catch (error) {
+      this.logger.fatal(error);
+      next(error);
+    }
+  }
+
+  @Get('/:ID')
+  async get(
+    @Params('ID') ID: string,
+    @Request() request: ExpressRequest,
+    @Response() response: ExpressResponse,
+    @Next() next: ExpressNextFunction
+  ) {
+    try {
+      return response.status(HttpStatus.Ok).json(null);
+    } catch (error) {
+      this.logger.fatal(error);
+      next(error);
+    }
+  }
+
+  @Put('/:ID')
+  async update(
+    @Params('ID') ID: string,
+    @Request() request: ExpressRequest,
+    @Response() response: ExpressResponse,
+    @Next() next: ExpressNextFunction
+  ) {
+    try {
+      const body = await validate<Update{{pascalCase name}}Dto>(Update{{pascalCase name}}Dto, request.body);
+
+      return response.status(HttpStatus.Ok).json(body);
+    } catch (error) {
+      this.logger.fatal(error);
+      next(error);
+    }
+  }
+
+  @Delete('/:ID')
+  async delete(
+    @Params('ID') ID: string,
+    @Request() request: ExpressRequest,
+    @Response() response: ExpressResponse,
+    @Next() next: ExpressNextFunction
+  ) {
+    try {
+      return response.sendStatus(HttpStatus.NoContent);
+    } catch (error) {
+      this.logger.fatal(error);
+      next(error);
+    }
+  }
+}
