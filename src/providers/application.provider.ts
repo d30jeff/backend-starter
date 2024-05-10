@@ -66,7 +66,9 @@ export const createApplication = async (
   );
 
   if (config.IS_TESTING === false) {
-    app.use(morgan('[:date[web]] :requestID :method :url :status - :response-time ms'));
+    app.use(
+      morgan('[:date[web]] :requestID :method :url :status - :response-time ms')
+    );
   }
 
   app.set('trust proxy', 1);
@@ -146,7 +148,9 @@ export const createApplication = async (
     next();
   });
 
-  Container.provide([{ provide: ERROR_MIDDLEWARE, useClass: GlobalErrorMiddleware }]);
+  Container.provide([
+    { provide: ERROR_MIDDLEWARE, useClass: GlobalErrorMiddleware },
+  ]);
 
   app.use((request: ExpressRequest, response, next) => {
     return response.status(HttpStatus.NotFound).json({

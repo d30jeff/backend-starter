@@ -28,23 +28,25 @@ if (config.IS_TESTING === false) {
   });
 }
 
-const prismaWriteConnection: PrismaClient<Prisma.PrismaClientOptions, 'query'> = new PrismaClient({
-  log,
-  datasources: {
-    db: {
-      url: config.DATABASE_URL,
+const prismaWriteConnection: PrismaClient<Prisma.PrismaClientOptions, 'query'> =
+  new PrismaClient({
+    log,
+    datasources: {
+      db: {
+        url: config.DATABASE_URL,
+      },
     },
-  },
-});
+  });
 
-const prismaReadConnection: PrismaClient<Prisma.PrismaClientOptions, 'query'> = new PrismaClient({
-  log,
-  datasources: {
-    db: {
-      url: config.DATABASE_READ_REPLICA_URL,
+const prismaReadConnection: PrismaClient<Prisma.PrismaClientOptions, 'query'> =
+  new PrismaClient({
+    log,
+    datasources: {
+      db: {
+        url: config.DATABASE_READ_REPLICA_URL,
+      },
     },
-  },
-});
+  });
 
 const displayLog = (event: Prisma.QueryEvent) => {
   const { query, params, duration } = event;

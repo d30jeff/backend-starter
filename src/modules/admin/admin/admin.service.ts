@@ -1,6 +1,9 @@
 import { Admin } from '@modules/admin/admin/admin.interface';
 import { CustomLogger, Logger } from '@providers/logger.provider';
-import { AdminPublicSelect, AdminRepository } from '@repositories/admin.repository';
+import {
+  AdminPublicSelect,
+  AdminRepository,
+} from '@repositories/admin.repository';
 import { EmailService } from '@services/email/email.service';
 import { FirebaseService } from '@services/firebase/firebase.service';
 import { Bcrypt } from '@utils/bcrypt.util';
@@ -46,7 +49,10 @@ export class AdminService implements Admin.Interface {
 
     const admin = await this.findByEmail(email);
 
-    if (!admin || (await Bcrypt.ComparePasswords(password, admin.passwordHash)) === false) {
+    if (
+      !admin ||
+      (await Bcrypt.ComparePasswords(password, admin.passwordHash)) === false
+    ) {
       throw new Admin.Exceptions.InvalidCredentials();
     }
 

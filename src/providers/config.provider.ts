@@ -49,7 +49,13 @@ export const config = {
 validateEnvironmentVariables();
 
 function validateEnvironmentVariables() {
-  const { IS_DEVELOPMENT, IS_STAGING, IS_TESTING, IS_PRODUCTION, ...requiredConfig } = config;
+  const {
+    IS_DEVELOPMENT,
+    IS_STAGING,
+    IS_TESTING,
+    IS_PRODUCTION,
+    ...requiredConfig
+  } = config;
 
   for (const [key, value] of Object.entries(requiredConfig)) {
     if (!value) {

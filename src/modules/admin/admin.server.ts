@@ -29,7 +29,10 @@ async function main() {
   );
 
   app.listen(config.ADMIN_PORT, async () => {
-    logger.success(`Admin API is running on port ${config.ADMIN_PORT} 🚀`, config);
+    logger.success(
+      `Admin API is running on port ${config.ADMIN_PORT} 🚀`,
+      config
+    );
   });
 }
 

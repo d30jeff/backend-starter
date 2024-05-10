@@ -106,6 +106,7 @@ model Consumer {
   updatedAt       DateTime?
   Preference      Preference?
   ConsumerAddress ConsumerAddress[]
+  MembershipCard  MembershipCard[]
 
   @@unique([type, email])
   @@index([ID, type, email, createdAt, updatedAt])
@@ -163,9 +164,13 @@ model Subscription {
 }
 
 model MembershipCard {
-  ID   String @id
-  type String
-  code String
+  ID         String   @id
+  type       String
+  code       String
+  consumerID String
+  Consumer   Consumer @relation(fields: [consumerID], references: [ID], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now()) @updatedAt
 
   @@index([ID, type, code])
 }
@@ -181,6 +186,9 @@ model Organization {
 
 model Outlet {
   ID             String       @id
+  name           String
   organizationID String
   Organization   Organization @relation(fields: [organizationID], references: [ID], onDelete: Cascade)
+
+  @@unique([name, organizationID])
 }
