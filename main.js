@@ -62,7 +62,9 @@ if (environment.name.toLowerCase() === 'development') {
 }
 
 async function copyFiles() {
-  const prepare = spawn('cp -r ./src/templates/* dist/templates/', { shell: true });
+  const prepare = spawn('cp -r ./src/templates/* dist/templates/', {
+    shell: true,
+  });
 
   prepare.stdout.on('data', (data) => {
     logger.info(data);

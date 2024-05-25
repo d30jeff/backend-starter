@@ -4,8 +4,10 @@ import { Signale } from 'signale';
 export namespace Application {
   export const Modules: {
     Admin: 'Admin';
+    Consumer: 'Consumer';
   } = {
     Admin: 'Admin',
+    Consumer: 'Consumer',
   };
 
   export type Modules = (typeof Modules)[keyof typeof Modules];

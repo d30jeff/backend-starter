@@ -10,7 +10,7 @@ generator dbml {
 datasource db {
   provider   = "postgres"
   url        = env("DATABASE_URL")
-  extensions = [postgis(version: "3.4.2")]
+  extensions = [postgis(version: "3.3.4")]
 }
 
 model Country {
@@ -18,10 +18,16 @@ model Country {
   name         String  @unique
   code         String  @unique
   diallingCode String  @unique
-  currencyCode String  @unique
   States       State[]
 
-  @@index([ID, name, code, diallingCode, currencyCode])
+  @@index([ID, name, code, diallingCode])
+}
+
+model Currency {
+  ID     String @id
+  name   String
+  code   String
+  number String
 }
 
 model State {
@@ -96,17 +102,17 @@ model Address {
 }
 
 model Consumer {
-  ID              String            @id
-  type            String
-  email           String
-  passwordHash    String
-  Profile         Profile?
-  lastLoginAt     DateTime?
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime?
-  Preference      Preference?
-  ConsumerAddress ConsumerAddress[]
-  MembershipCard  MembershipCard[]
+  ID                String            @id
+  type              String
+  email             String
+  passwordHash      String
+  Profile           Profile?
+  lastLoginAt       DateTime?
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime?
+  Preference        Preference?
+  ConsumerAddresses ConsumerAddress[]
+  MembershipCards   MembershipCard[]
 
   @@unique([type, email])
   @@index([ID, type, email, createdAt, updatedAt])
@@ -130,7 +136,7 @@ model Profile {
   lastName    String?
   nric        String?
   gender      String?
-  dateOfBirth DateTime?
+  dateOfBirth DateTime
   consumerID  String    @unique
   Consumer    Consumer  @relation(fields: [consumerID], references: [ID], onDelete: Cascade)
   createdAt   DateTime  @default(now())

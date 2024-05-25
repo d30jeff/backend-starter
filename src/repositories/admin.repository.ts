@@ -24,11 +24,12 @@ export type AdminWithPrivateFields = Prisma.AdminGetPayload<{
   select: typeof AdminPrivateSelect;
 }>;
 
-type CustomReturnType<T extends Prisma.AdminFindFirstArgs['select']> = T extends AdminPrivateSelect
-  ? AdminWithPrivateFields
-  : T extends AdminPublicSelect
-  ? AdminWithPublicFields
-  : Admin;
+type CustomReturnType<T extends Prisma.AdminFindFirstArgs['select']> =
+  T extends AdminPrivateSelect
+    ? AdminWithPrivateFields
+    : T extends AdminPublicSelect
+    ? AdminWithPublicFields
+    : Admin;
 
 @Service()
 export class AdminRepository {
@@ -43,7 +44,9 @@ export class AdminRepository {
     params: Prisma.AdminUpsertArgs,
     connection: Prisma.TransactionClient = database.write
   ): Promise<CustomReturnType<T>> {
-    return connection.admin.upsert(params) as unknown as Promise<CustomReturnType<T>>;
+    return connection.admin.upsert(params) as unknown as Promise<
+      CustomReturnType<T>
+    >;
   }
 
   create<T>(
@@ -52,9 +55,9 @@ export class AdminRepository {
     },
     connection: Prisma.TransactionClient = database.write
   ): Promise<CustomReturnType<T>> {
-    return connection.admin.create(params as Prisma.AdminCreateArgs) as unknown as Promise<
-      CustomReturnType<T>
-    >;
+    return connection.admin.create(
+      params as Prisma.AdminCreateArgs
+    ) as unknown as Promise<CustomReturnType<T>>;
   }
 
   createMany<T>(
@@ -63,26 +66,33 @@ export class AdminRepository {
     },
     connection: Prisma.TransactionClient = database.write
   ): Promise<Array<CustomReturnType<T>>> {
-    return connection.admin.createMany(params as Prisma.AdminCreateManyArgs) as unknown as Promise<
-      Array<CustomReturnType<T>>
-    >;
+    return connection.admin.createMany(
+      params as Prisma.AdminCreateManyArgs
+    ) as unknown as Promise<Array<CustomReturnType<T>>>;
   }
 
   findFirst<T>(
     params: Prisma.AdminFindFirstArgs,
     connection: Prisma.TransactionClient = database.read
   ): Promise<CustomReturnType<T>> {
-    return connection.admin.findFirst(params) as unknown as Promise<CustomReturnType<T>>;
+    return connection.admin.findFirst(params) as unknown as Promise<
+      CustomReturnType<T>
+    >;
   }
 
   findMany<T>(
     params: Prisma.AdminFindManyArgs,
     connection: Prisma.TransactionClient = database.read
   ): Promise<Array<CustomReturnType<T>>> {
-    return connection.admin.findMany(params) as unknown as Promise<Array<CustomReturnType<T>>>;
+    return connection.admin.findMany(params) as unknown as Promise<
+      Array<CustomReturnType<T>>
+    >;
   }
 
-  count(params: Prisma.AdminCountArgs, connection: Prisma.TransactionClient = database.read) {
+  count(
+    params: Prisma.AdminCountArgs,
+    connection: Prisma.TransactionClient = database.read
+  ) {
     return connection.admin.count(params);
   }
 
@@ -90,17 +100,24 @@ export class AdminRepository {
     params: Prisma.AdminUpdateArgs,
     connection: Prisma.TransactionClient = database.write
   ): Promise<CustomReturnType<T>> {
-    return connection.admin.update(params) as unknown as Promise<CustomReturnType<T>>;
+    return connection.admin.update(params) as unknown as Promise<
+      CustomReturnType<T>
+    >;
   }
 
   updateMany<T>(
     params: Prisma.AdminUpdateManyArgs,
     connection: Prisma.TransactionClient = database.write
   ): Promise<Array<CustomReturnType<T>>> {
-    return connection.admin.updateMany(params) as unknown as Promise<Array<CustomReturnType<T>>>;
+    return connection.admin.updateMany(params) as unknown as Promise<
+      Array<CustomReturnType<T>>
+    >;
   }
 
-  delete(params: Prisma.AdminDeleteArgs, connection: Prisma.TransactionClient = database.write) {
+  delete(
+    params: Prisma.AdminDeleteArgs,
+    connection: Prisma.TransactionClient = database.write
+  ) {
     return connection.admin.delete(params);
   }
 
