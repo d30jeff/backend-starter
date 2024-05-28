@@ -14,7 +14,11 @@ import { redis } from '@providers/redis.provider';
 import { dayjs } from '@utils/dayjs.util';
 import { getFormattedPath } from '@utils/request.util';
 import { responseInterceptor } from '@utils/response.util';
-import { json, raw, urlencoded } from 'body-parser';
+import {
+ json,
+ raw,
+ urlencoded
+} from 'body-parser';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
@@ -31,7 +35,12 @@ import 'reflect-metadata';
 export const createApplication = async (
   params: Application.CreateApplicationParams
 ): Promise<Application.Instance> => {
-  const { name, controllers, origin, staticPaths } = params;
+  const {
+    name,
+    controllers,
+    origin,
+    staticPaths
+  } = params;
 
   if (!name) {
     throw new Error('Application name is required');
@@ -148,7 +157,9 @@ export const createApplication = async (
     next();
   });
 
-  Container.provide([
+  const container = new Container();
+
+  container.provide([
     { provide: ERROR_MIDDLEWARE, useClass: GlobalErrorMiddleware },
   ]);
 

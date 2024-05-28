@@ -1,11 +1,18 @@
-import { GetObjectCommand, PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
+import {
+  GetObjectCommand,
+  PutObjectCommand,
+  S3Client,
+} from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { config } from '@providers/config.provider';
 import { CustomLogger, Logger } from '@providers/logger.provider';
 import { typeToExtension } from '@utils/mime-types.util';
 import { nanoid } from 'nanoid';
 import { dayjs } from '@utils/dayjs.util';
-import { InternalServerErrorException, NotFoundException } from '@exceptions/http-exception';
+import {
+  InternalServerErrorException,
+  NotFoundException,
+} from '@exceptions/http-exception';
 import { RedisService } from '@services/redis/redis.service';
 import { Redis } from '@services/redis/redis.interface';
 import { S3 } from '@services/s3/s3.interface';
@@ -116,7 +123,9 @@ export class S3Service {
   async upload(params: S3.UploadParams): Promise<string> {
     const { mimetype, data, accountID } = params;
 
-    const key = `${module}/${accountID}/${nanoid()}.${typeToExtension(mimetype)}`;
+    const key = `${module}/${accountID}/${nanoid()}.${typeToExtension(
+      mimetype
+    )}`;
 
     await client.send(
       new PutObjectCommand({

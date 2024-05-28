@@ -76,7 +76,7 @@ async function copyFiles() {
 
   prepare.on('close', (code) => {
     if (code === 0) {
-      logger.info('Done copying template files');
+      logger.info('Done copying template files...');
     }
   });
 }
