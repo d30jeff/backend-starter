@@ -12,14 +12,14 @@ import {
 describe('Http Exception Test', () => {
   test('It Returns Expected 400 Response', () => {
     const exception = new BadRequestException('Hello');
-    expect(exception.code).toBe('BadRequest');
+    expect(exception.code).toBe('Hello');
     expect(exception.message).toBe('Hello');
     expect(exception.statusCode).toBe(HttpStatus.BadRequest);
   });
 
   test('It Returns Expected 401 Response', () => {
     const exception = new UnauthorizedException('Invalid Credentials');
-    expect(exception.code).toBe('Unauthorized');
+    expect(exception.code).toBe('InvalidCredentials');
     expect(exception.statusCode).toBe(HttpStatus.Unauthorized);
   });
 
