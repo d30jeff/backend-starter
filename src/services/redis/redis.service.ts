@@ -1,6 +1,6 @@
-import { redis } from '@providers/redis.provider';
 import { Redis } from '@services/redis/redis.interface';
 import { Service } from 'typedi';
+import { redis } from '@providers/redis.provider';
 
 @Service()
 export class RedisService {

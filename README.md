@@ -1,9 +1,7 @@
 ### Backend Starter
+Backend Starter in TypeScript, Express, DI, Prisma, Docker
 
 **Stack**
-
-- Prisma
-- Mailgun
 
 ### Setup dotenv file
 
@@ -25,8 +23,11 @@
 
 `yarn start <module>:<mode>`
 
-Where module is the entry point in ./src/servers
+Where module is the entrypoint point in ./src/servers
+
+e.g.
+
+`yarn start admin:dev`
 
 ### Entrypoint
-
 Please check main.js

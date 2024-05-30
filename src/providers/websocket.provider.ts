@@ -1,6 +1,8 @@
-import { createServer } from 'http';
-import { SignaleLogger } from '@providers/logger.provider';
 import { Server } from 'socket.io';
+import { SignaleLogger } from '@providers/logger.provider';
+import { createServer } from 'node:http';
+
+const noop = () => {};
 
 const httpServer = createServer();
 const logger = SignaleLogger('Websocket');
@@ -14,11 +16,8 @@ const io = new Server(httpServer, {
 
 io.on('connection', (socket) => {
   // logger.info('Connected', socket.request.headers);
-
   socket.join('testing-room');
-
   // TODO: Verify connection?
-
   socket.to('testing-room').emit('testing-room', {
     message: 'Hello from room',
   });
@@ -31,9 +30,11 @@ io.on('connection', (socket) => {
     message: 'Hello from room',
   });
 
-  socket.on('hello', () => {});
+  socket.on('hello', noop);
   // useSocketServer(io, {
+
   //   controllers: [OrderWebsocketController],
+
   // });
 });
 

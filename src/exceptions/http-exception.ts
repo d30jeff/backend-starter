@@ -1,6 +1,6 @@
-import { HttpStatus } from '@enums/http-status.enum';
 import { BaseException } from '@exceptions/base.exception';
 import { ErrorField } from '@interfaces/errors';
+import { HttpStatus } from '@enums/http-status.enum';
 import { StringUtil } from '@utils/string.util';
 
 export interface HttpExceptionProps {

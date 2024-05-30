@@ -1,7 +1,4 @@
-import { snakeCase } from 'snake-case';
-import { pascalCase } from 'pascal-case';
-import camelCase from 'camelcase';
-import { titleCase } from 'title-case';
+import { camelCase, capitalCase, pascalCase, snakeCase } from 'change-case-all';
 
 export class StringUtil {
   static Trim(params: string) {
@@ -15,8 +12,12 @@ export class StringUtil {
     return pascalCase(params);
   }
 
-  static TitleCase(params: string): string {
-    return titleCase(params);
+  /**
+   * AKA Title Case
+   * e.g. "Hello World"
+   */
+  static CapitalCase(params: string): string {
+    return capitalCase(params);
   }
 
   static CamelCase(params: string): string {

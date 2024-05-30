@@ -1,46 +1,37 @@
-require('source-map-support').install();
+import 'reflect-metadata';
+import { Application } from '@interfaces/application.interface';
 import { Container } from '@decorators/di';
 import { ERROR_MIDDLEWARE, attachControllers } from '@decorators/express';
-import { HttpStatus } from '@enums/http-status.enum';
-import { Application } from '@interfaces/application.interface';
 import { ExpressRequest } from '@interfaces/express.interface';
 import { GlobalErrorMiddleware } from '@middlewares/error.middleware';
+import { HttpStatus } from '@enums/http-status.enum';
+import { SignaleLogger } from '@providers/logger.provider';
+import { config } from '@providers/config.provider';
+import { dayjs } from '@utils/dayjs.util';
+import { generateID } from '@providers/nanoid.provider';
+import { getFormattedPath } from '@utils/request.util';
 import { globalRateLimit } from '@middlewares/global-rate-limit.middleware';
 import { globalSlowDown } from '@middlewares/global-slow-down.middleware';
-import { config } from '@providers/config.provider';
-import { SignaleLogger } from '@providers/logger.provider';
-import { generateID } from '@providers/nanoid.provider';
+import { json, raw, urlencoded } from 'body-parser';
+import { nanoid } from 'nanoid';
 import { redis } from '@providers/redis.provider';
-import { dayjs } from '@utils/dayjs.util';
-import { getFormattedPath } from '@utils/request.util';
 import { responseInterceptor } from '@utils/response.util';
-import {
- json,
- raw,
- urlencoded
-} from 'body-parser';
+import RedisStore from 'connect-redis';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express, { Router } from 'express';
+import helmet from 'helmet';
+import morgan from 'morgan';
 import mung from 'express-mung';
 import requestID from 'express-request-id';
 import session, { CookieOptions, SessionOptions } from 'express-session';
 import useragent from 'express-useragent';
-import helmet from 'helmet';
-import morgan from 'morgan';
-import { nanoid } from 'nanoid';
-import 'reflect-metadata';
 
 export const createApplication = async (
   params: Application.CreateApplicationParams
 ): Promise<Application.Instance> => {
-  const {
-    name,
-    controllers,
-    origin,
-    staticPaths
-  } = params;
+  const { name, controllers, origin, staticPaths } = params;
 
   if (!name) {
     throw new Error('Application name is required');
@@ -98,8 +89,6 @@ export const createApplication = async (
   }
 
   app.use(mung.jsonAsync(responseInterceptor));
-
-  const RedisStore = require('connect-redis')(session);
 
   const sessionOptions: SessionOptions = {
     name,

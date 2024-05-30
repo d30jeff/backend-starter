@@ -1,5 +1,9 @@
 import { StringUtil } from '@utils/string.util';
-import { Transform, TransformFnParams, TransformOptions } from 'class-transformer';
+import {
+  Transform,
+  TransformFnParams,
+  TransformOptions,
+} from 'class-transformer';
 
 export function Trim(transformOptions?: TransformOptions) {
   return Transform((source: TransformFnParams) => {
@@ -17,6 +21,6 @@ export function ToTitleCase(transformOptions?: TransformOptions) {
       return null;
     }
 
-    return StringUtil.TitleCase(StringUtil.Trim(source.value));
+    return StringUtil.CapitalCase(StringUtil.Trim(source.value));
   }, transformOptions);
 }

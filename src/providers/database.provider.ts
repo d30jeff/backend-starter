@@ -1,8 +1,8 @@
 import { Prisma, PrismaClient } from '@prisma/client';
-import { config } from '@providers/config.provider';
 import { SignaleLogger } from '@providers/logger.provider';
-import { generateID } from '@providers/nanoid.provider';
 import { StringUtil } from '@utils/string.util';
+import { config } from '@providers/config.provider';
+import { generateID } from '@providers/nanoid.provider';
 import { getExternalSignedURL } from '@utils/response.util';
 
 const logger = SignaleLogger('Prisma');

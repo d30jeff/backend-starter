@@ -1,7 +1,7 @@
 import { CustomLogger, Logger } from '@providers/logger.provider';
 import { Firebase } from '@services/firebase/firebase.interface';
-import firebase from 'firebase-admin';
 import { Service } from 'typedi';
+import firebase from 'firebase-admin';
 
 @Service()
 export class FirebaseService implements Firebase.Interface {

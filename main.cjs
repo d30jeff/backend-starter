@@ -49,7 +49,7 @@ const logger = new Signale({
 });
 
 if (!environment) {
-  logger.info('Invalid Environment, valid options: ', ENVIRONMENTS);
+  logger.info('Invalid environment. Valid options are: ', ENVIRONMENTS);
   process.exit();
 }
 
@@ -57,11 +57,11 @@ if (environment.name.toLowerCase() === 'development') {
   logger.info('Development environment found, preparing');
   prepare(() => main());
 } else {
-  copyFiles();
+  copyTemplateFiles();
   main();
 }
 
-async function copyFiles() {
+async function copyTemplateFiles() {
   const prepare = spawn('cp -r ./src/templates/* dist/templates/', {
     shell: true,
   });
@@ -94,7 +94,7 @@ async function prepare(cb) {
 
   prepare.on('close', (code) => {
     if (code === 0) {
-      copyFiles();
+      copyTemplateFiles();
       cb();
     } else {
       console.error('Yarn install failed');

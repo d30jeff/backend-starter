@@ -1,4 +1,3 @@
-import { HttpStatus } from '@enums/http-status.enum';
 import {
   BadRequestException,
   ConflictException,
@@ -8,6 +7,7 @@ import {
   UnauthorizedException,
   UnprocessableEntityException,
 } from '@exceptions/http-exception';
+import { HttpStatus } from '@enums/http-status.enum';
 
 describe('Http Exception Test', () => {
   test('It Returns Expected 400 Response', () => {

@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "CommonJS",
     "allowJs": true,
     "lib": ["ES6", "DOM"],
     "declaration": true,
@@ -10,13 +10,13 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "target": "ES2017",
+    "target": "ESNext",
     "sourceMap": true,
     "declarationMap": true,
     "outDir": "./dist",
     "declarationDir": "./dist/types",
     "baseUrl": "./src",
-    "typeRoots": ["./@types", "node_modules/@types"],
+    "typeRoots": ["./types", "node_modules/@types"],
     "incremental": true,
     "paths": {
       "@*": ["*"]
