@@ -1,5 +1,5 @@
 import { Server } from 'socket.io';
-import { SignaleLogger } from '@providers/logger.provider';
+import { SignaleLogger } from '@/providers/logger.provider.js';
 import { createServer } from 'node:http';
 
 const noop = () => {};
@@ -7,7 +7,7 @@ const noop = () => {};
 const httpServer = createServer();
 const logger = SignaleLogger('Websocket');
 
-const io = new Server(httpServer, {
+const io: Server = new Server(httpServer, {
   cookie: true,
   cors: {
     origin: 'http://localhost:4001',

@@ -1,5 +1,5 @@
-import { NotFoundException } from '@exceptions/http-exception';
-import { CommonResponse } from '@responses/common.response';
+import { CommonResponse } from '@/responses/common.response.js';
+import { NotFoundException } from '@/exceptions/http-exception.js';
 
 export namespace Country {
   export class Response extends CommonResponse {

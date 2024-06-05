@@ -1,46 +1,16 @@
-import { Application } from '@interfaces/application.interface';
-import { Middleware, Next, Request, Response } from '@decorators/express';
-import { Type } from '@decorators/di/lib/src/types';
-import {
-  ExpressNextFunction,
-  ExpressRequest,
-  ExpressResponse,
-} from '@interfaces/express.interface';
-import { CustomLogger, Logger } from '@providers/logger.provider';
-
-export function IsValid{{pascalCase name}}(
-  location: Application.Location,
-  propertyName: string = 'ID'
-) {
-  abstract class ValidationMiddlewareClass implements Middleware {
-    @Logger()
-    private readonly logger: CustomLogger;
-    public async use(
-      @Request() request: ExpressRequest,
-      @Response() response: ExpressResponse,
-      @Next() next: ExpressNextFunction
-    ) {
-      const ID = request[location][propertyName];
-
-      if (!ID && location !== 'params') {
-        return next();
-      }
-
-      next();
-    }
-  }
-  return ValidationMiddlewareClass as Type;
-}
-
-export class {{pascalCase name}}Middleware implements Middleware {
-  @Logger()
-  private readonly logger: CustomLogger;
-
-  public async use(
-    @Request() request: ExpressRequest,
-    @Response() response: ExpressResponse,
-    @Next() next: ExpressNextFunction
-  ) {
-    next();
-  }
-}
+import { Application } from '@/interfaces/application.interface'; import {
+Middleware, Next, Request, Response } from '@decorators/express'; import { Type
+} from '@decorators/di/lib/src/types'; import { ExpressNextFunction,
+ExpressRequest, ExpressResponse, } from '@/interfaces/express.interface'; import
+{ CustomLogger, Logger } from '@/providers/logger.provider'; export function
+IsValid{{pascalCase name}}( location: Application.Location, propertyName: string
+= 'ID' ) { abstract class ValidationMiddlewareClass implements Middleware {
+@Logger() private readonly logger: CustomLogger; public async use( @Request()
+request: ExpressRequest, @Response() response: ExpressResponse, @Next() next:
+ExpressNextFunction ) { const ID = request[location][propertyName]; if (!ID &&
+location !== 'params') { return next(); } next(); } } return
+ValidationMiddlewareClass as Type; } export class
+{{pascalCase name}}Middleware implements Middleware { @Logger() private readonly
+logger: CustomLogger; public async use( @Request() request: ExpressRequest,
+@Response() response: ExpressResponse, @Next() next: ExpressNextFunction ) {
+next(); } }

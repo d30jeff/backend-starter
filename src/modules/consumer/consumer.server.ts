@@ -1,6 +1,6 @@
-import { controllers } from '@modules/consumer/consumer.controllers';
-import { createApplication } from '@providers/application.provider';
-import { config } from '@providers/config.provider';
+import { config } from '@/providers/config.provider.js';
+import { controllers } from '@/modules/consumer/consumer.controllers.js';
+import { createApplication } from '@/providers/application.provider.js';
 
 async function main() {
   const { app, logger } = await createApplication({

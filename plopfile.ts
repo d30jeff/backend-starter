@@ -1,6 +1,6 @@
-import fs from 'fs';
-import { join } from 'path';
 import { ActionType, NodePlopAPI } from 'plop';
+import { join } from 'path';
+import fs from 'fs';
 
 export default function (plop: NodePlopAPI) {
   const modules = fs.readdirSync(join(__dirname, './src/modules'));
@@ -96,7 +96,8 @@ const createServer = (data: any, items: ActionType[]) => {
     {
       type: 'add',
       path: 'src/servers/{{kebabCase server}}/healthcheck/healthcheck.controller.ts',
-      templateFile: 'templates/servers/healthcheck/healthcheck.controller.ts.hbs',
+      templateFile:
+        'templates/servers/healthcheck/healthcheck.controller.ts.hbs',
     },
     {
       type: 'add',
@@ -116,7 +117,8 @@ const createServer = (data: any, items: ActionType[]) => {
     {
       type: 'add',
       path: 'src/servers/{{kebabCase server}}/device-token/device-token.controller.ts',
-      templateFile: 'templates/servers/device-token/device-token.controller.ts.hbs',
+      templateFile:
+        'templates/servers/device-token/device-token.controller.ts.hbs',
     },
     {
       // Modify .env file
@@ -173,7 +175,7 @@ const createModule = (data: any, items: ActionType[]) => {
     {
       type: 'modify',
       pattern: ".controller';",
-      template: `.controller';\nimport { {{pascalCase name}}Controller } from '@servers/{{kebabCase server}}/{{kebabCase name}}/{{kebabCase name}}.controller';`,
+      template: `.controller';\nimport { {{pascalCase name}}Controller } from '@/servers/{{kebabCase server}}/{{kebabCase name}}/{{kebabCase name}}.controller';`,
       path: 'src/servers/{{kebabCase server}}/{{kebabCase server}}.controllers.ts',
     },
     {
@@ -185,7 +187,7 @@ const createModule = (data: any, items: ActionType[]) => {
     {
       type: 'modify',
       pattern: 'export const services = {',
-      template: `import { {{pascalCase name}}Service } from '@servers/{{kebabCase server}}/{{kebabCase name}}/{{kebabCase name}}.service';\nexport const services = {`,
+      template: `import { {{pascalCase name}}Service } from '@/servers/{{kebabCase server}}/{{kebabCase name}}/{{kebabCase name}}.service';\nexport const services = {`,
       path: 'src/servers/{{kebabCase server}}/{{kebabCase server}}.services.ts',
     },
     {
@@ -222,7 +224,7 @@ const createModule = (data: any, items: ActionType[]) => {
       {
         type: 'modify',
         pattern: ".repository';",
-        template: `.repository';\nimport { {{pascalCase name}}Repository } from '@repositories/{{kebabCase name}}.repository';`,
+        template: `.repository';\nimport { {{pascalCase name}}Repository } from '@/repositories/{{kebabCase name}}.repository';`,
         path: 'src/repositories/index.repository.ts',
       },
       {

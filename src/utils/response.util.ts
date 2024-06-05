@@ -1,11 +1,12 @@
-import { ExpressRequest, ExpressResponse } from '@interfaces/express.interface';
-import { SignaleLogger } from '@providers/logger.provider';
-import { getFormattedPath } from '@utils/request.util';
-import Container from 'typedi';
-import { dayjs } from './dayjs.util';
+import {
+  ExpressRequest,
+  ExpressResponse,
+} from '@/interfaces/express.interface.js';
+import { SignaleLogger } from '@/providers/logger.provider.js';
+import { dayjs } from '@/utils/dayjs.util.js';
+import { getFormattedPath } from '@/utils/request.util.js';
 
 // const aliOSSService = Container.get(AliOSSService);
-
 const logger = SignaleLogger('Response Util');
 
 export const getExternalSignedURL = async (data: any) => {

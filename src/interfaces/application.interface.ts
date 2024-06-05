@@ -64,6 +64,7 @@ export namespace Application {
     controllers: any[];
     origin: string[];
     staticPaths?: Array<{ prefix: string; path: string; enabled: boolean }>;
+    logRequests?: boolean;
   };
 
   export namespace Helper {

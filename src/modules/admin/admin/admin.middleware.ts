@@ -1,13 +1,13 @@
-import { Middleware, Next, Request, Response } from '@decorators/express';
+import { Admin } from '@/modules/admin/admin/admin.interface.js';
+import { AdminService } from '@/modules/admin/admin/admin.service.js';
+import { Container } from 'typedi';
+import { CustomLogger, Logger } from '@/providers/logger.provider.js';
 import {
   ExpressNextFunction,
   ExpressRequest,
   ExpressResponse,
-} from '@interfaces/express.interface';
-import { Admin } from '@modules/admin/admin/admin.interface';
-import { AdminService } from '@modules/admin/admin/admin.service';
-import { CustomLogger, Logger } from '@providers/logger.provider';
-import Container from 'typedi';
+} from '@/interfaces/express.interface.js';
+import { Middleware, Next, Request, Response } from '@decorators/express';
 
 export class AuthenticatedAdmin implements Middleware {
   @Logger()

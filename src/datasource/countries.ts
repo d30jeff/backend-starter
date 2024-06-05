@@ -1,4 +1,4 @@
-import { StateData, states } from '@datasource/states';
+import { StateData, states } from '@/datasource/states.js';
 
 type Country = {
   name: string;

@@ -76,7 +76,7 @@ async function copyTemplateFiles() {
 
   prepare.on('close', (code) => {
     if (code === 0) {
-      logger.info('Done copying template files...');
+      logger.info('Done copying template files');
     }
   });
 }
@@ -112,10 +112,12 @@ async function main() {
     },
   };
 
+  const script = `node -r tsconfig-paths/register -r source-map-support/register ./dist/modules/${server}/${server}.server.js`;
+
   if (['development', 'dev'].includes(env)) {
-    logger.log(`Running ${server} in development mode`);
+    logger.log(`Running ${server} in development mode. \n ${script}`);
     child = spawn(
-      `tsc-watch --noClear --onSuccess "node -r module-alias/register -r source-map-support/register ./dist/modules/${server}/${server}.server.js"`,
+      `tsc-watch --noClear --onSuccess "sh -c 'yarn tsc-alias -p tsconfig.json && ${script}'"`,
       {
         shell: true,
         stdio: 'inherit',
@@ -123,15 +125,10 @@ async function main() {
       envArgs
     );
   } else {
+    const [_, ...rest] = script.split(' ')
     child = spawn(
       'node',
-      [
-        '-r',
-        'module-alias/register',
-        '-r',
-        'source-map-support/register',
-        `./dist/modules/${server}/${server}.server.js`,
-      ],
+      rest,
       {
         stdio: 'inherit',
       },

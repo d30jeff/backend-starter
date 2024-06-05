@@ -1,4 +1,4 @@
-import { ExpressRequest } from '@interfaces/express.interface';
+import { ExpressRequest } from '@/interfaces/express.interface.js';
 
 export const serializeSortQueries = (request: ExpressRequest) => {
   const sort = request.query.sort as string;

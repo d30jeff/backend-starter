@@ -1,3 +1,6 @@
+import { Admin } from '@/modules/admin/admin/admin.interface.js';
+import { AdminService } from '@/modules/admin/admin/admin.service.js';
+import { Container } from 'typedi';
 import {
   Controller,
   Delete,
@@ -9,19 +12,16 @@ import {
   Request,
   Response,
 } from '@decorators/express';
-import { HttpStatus } from '@enums/http-status.enum';
+import { ControllerSlowDown } from '@/middlewares/controller-slow-down.middleware.js';
+import { CustomLogger, Logger } from '@/providers/logger.provider.js';
 import {
   ExpressNextFunction,
   ExpressRequest,
   ExpressResponse,
-} from '@interfaces/express.interface';
-import { ControllerSlowDown } from '@middlewares/controller-slow-down.middleware';
-import { Admin } from '@modules/admin/admin/admin.interface';
-import { AdminService } from '@modules/admin/admin/admin.service';
-import { CustomLogger, Logger } from '@providers/logger.provider';
-import { validate } from '@utils/class-validator.util';
-import { serializePaginationParams } from '@utils/pagination.util';
-import Container from 'typedi';
+} from '@/interfaces/express.interface.js';
+import { HttpStatus } from '@/enums/http-status.enum.js';
+import { serializePaginationParams } from '@/utils/pagination.util.js';
+import { validate } from '@/utils/class-validator.util.js';
 
 @Controller('/admin')
 export class AdminController {
@@ -38,7 +38,10 @@ export class AdminController {
     @Next() next: ExpressNextFunction
   ) {
     try {
-      const body = await validate<Admin.SignIn.Dto>(Admin.SignIn.Dto, request.body);
+      const body = await validate<Admin.SignIn.Dto>(
+        Admin.SignIn.Dto,
+        request.body
+      );
       const data = await this.adminService.signIn(body);
 
       return response.status(HttpStatus.Created).json(body);

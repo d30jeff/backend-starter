@@ -1,9 +1,9 @@
-import { serializePaginationParams } from '@utils/pagination.util';
+import { serializePaginationParams } from '@/utils/pagination.util';
 import {
   ExpressNextFunction,
   ExpressRequest,
   ExpressResponse,
-} from '@interfaces/express.interface';
+} from '@/interfaces/express.interface';
 import {
   Controller,
   Delete,
@@ -15,12 +15,12 @@ import {
   Request,
   Response,
 } from '@decorators/express';
-import { Create{{pascalCase name}}Dto, Update{{pascalCase name}}Dto } from '@servers/{{kebabCase server}}/{{kebabCase name}}/{{kebabCase name}}.dto';
-import { {{pascalCase name}}Response } from '@servers/{{kebabCase server}}/{{kebabCase name}}/{{kebabCase name}}.response';
-import { CustomLogger, Logger } from '@providers/logger.provider';
-import { validate } from '@utils/class-validator.util';
-import { services } from '@servers/{{kebabCase server}}/{{kebabCase server}}.services';
-import { HttpStatus } from '@enums/http-status.enum';
+import { Create{{pascalCase name}}Dto, Update{{pascalCase name}}Dto } from '@/servers/{{kebabCase server}}/{{kebabCase name}}/{{kebabCase name}}.dto';
+import { {{pascalCase name}}Response } from '@/servers/{{kebabCase server}}/{{kebabCase name}}/{{kebabCase name}}.response';
+import { CustomLogger, Logger } from '@/providers/logger.provider';
+import { validate } from '@/utils/class-validator.util';
+import { services } from '@/servers/{{kebabCase server}}/{{kebabCase server}}.services';
+import { HttpStatus } from '@/enums/http-status.enum';
 
 @Controller('/')
 export class {{pascalCase name}}Controller {

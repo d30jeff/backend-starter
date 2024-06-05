@@ -1,6 +1,6 @@
-import { Prisma, Admin } from '@prisma/client';
-import { database } from '@providers/database.provider';
+import { Admin, Prisma } from '@prisma/client';
 import { Service } from 'typedi';
+import { database } from '@/providers/database.provider.js';
 
 const fields = {
   ID: true,
@@ -28,8 +28,8 @@ type CustomReturnType<T extends Prisma.AdminFindFirstArgs['select']> =
   T extends AdminPrivateSelect
     ? AdminWithPrivateFields
     : T extends AdminPublicSelect
-    ? AdminWithPublicFields
-    : Admin;
+      ? AdminWithPublicFields
+      : Admin;
 
 @Service()
 export class AdminRepository {

@@ -1,8 +1,8 @@
-import { config } from '@providers/config.provider';
-import { Signale } from 'signale';
+import { config } from '@/providers/config.provider.js';
+import Signale from 'signale';
 
-export const SignaleLogger = (name: string): Signale => {
-  return new Signale({
+export const SignaleLogger = (name: string): Signale.Signale => {
+  return new Signale.Signale({
     scope: `${config.NODE_ENV.toUpperCase()} ${name}`,
     disabled: config.IS_TESTING,
     config: {
@@ -12,7 +12,7 @@ export const SignaleLogger = (name: string): Signale => {
   });
 };
 
-export type CustomLogger = Signale;
+export type CustomLogger = Signale.Signale;
 
 export const Logger = () => {
   return (target, key: string | symbol) => {

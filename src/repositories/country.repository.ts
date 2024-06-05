@@ -1,6 +1,6 @@
-import { Prisma, Country } from '@prisma/client';
-import { database } from '@providers/database.provider';
+import { Country, Prisma } from '@prisma/client';
 import { Service } from 'typedi';
+import { database } from '@/providers/database.provider.js';
 
 const fields = {
   ID: true,
@@ -14,7 +14,9 @@ export type CountryWithPublicFields = Prisma.CountryGetPayload<{
   select: typeof CountryPublicSelect;
 }>;
 
-export const CountryPrivateSelect = { ...fields } satisfies Prisma.CountrySelect;
+export const CountryPrivateSelect = {
+  ...fields,
+} satisfies Prisma.CountrySelect;
 export type CountryPrivateSelect = typeof CountryPrivateSelect;
 
 export type CountryWithPrivateFields = Prisma.CountryGetPayload<{
@@ -25,8 +27,8 @@ type CustomReturnType<T extends Prisma.CountryFindFirstArgs['select']> =
   T extends CountryPrivateSelect
     ? CountryWithPrivateFields
     : T extends CountryPublicSelect
-    ? CountryWithPublicFields
-    : Country;
+      ? CountryWithPublicFields
+      : Country;
 
 @Service()
 export class CountryRepository {
@@ -41,7 +43,9 @@ export class CountryRepository {
     params: Prisma.CountryUpsertArgs,
     connection: Prisma.TransactionClient = database.write
   ): Promise<CustomReturnType<T>> {
-    return connection.country.upsert(params) as unknown as Promise<CustomReturnType<T>>;
+    return connection.country.upsert(params) as unknown as Promise<
+      CustomReturnType<T>
+    >;
   }
 
   create<T>(
@@ -50,9 +54,9 @@ export class CountryRepository {
     },
     connection: Prisma.TransactionClient = database.write
   ): Promise<CustomReturnType<T>> {
-    return connection.country.create(params as Prisma.CountryCreateArgs) as unknown as Promise<
-      CustomReturnType<T>
-    >;
+    return connection.country.create(
+      params as Prisma.CountryCreateArgs
+    ) as unknown as Promise<CustomReturnType<T>>;
   }
 
   createMany<T>(
@@ -70,17 +74,24 @@ export class CountryRepository {
     params: Prisma.CountryFindFirstArgs,
     connection: Prisma.TransactionClient = database.read
   ): Promise<CustomReturnType<T>> {
-    return connection.country.findFirst(params) as unknown as Promise<CustomReturnType<T>>;
+    return connection.country.findFirst(params) as unknown as Promise<
+      CustomReturnType<T>
+    >;
   }
 
   findMany<T>(
     params: Prisma.CountryFindManyArgs,
     connection: Prisma.TransactionClient = database.read
   ): Promise<Array<CustomReturnType<T>>> {
-    return connection.country.findMany(params) as unknown as Promise<Array<CustomReturnType<T>>>;
+    return connection.country.findMany(params) as unknown as Promise<
+      Array<CustomReturnType<T>>
+    >;
   }
 
-  count(params: Prisma.CountryCountArgs, connection: Prisma.TransactionClient = database.read) {
+  count(
+    params: Prisma.CountryCountArgs,
+    connection: Prisma.TransactionClient = database.read
+  ) {
     return connection.country.count(params);
   }
 
@@ -88,17 +99,24 @@ export class CountryRepository {
     params: Prisma.CountryUpdateArgs,
     connection: Prisma.TransactionClient = database.write
   ): Promise<CustomReturnType<T>> {
-    return connection.country.update(params) as unknown as Promise<CustomReturnType<T>>;
+    return connection.country.update(params) as unknown as Promise<
+      CustomReturnType<T>
+    >;
   }
 
   updateMany<T>(
     params: Prisma.CountryUpdateManyArgs,
     connection: Prisma.TransactionClient = database.write
   ): Promise<Array<CustomReturnType<T>>> {
-    return connection.country.updateMany(params) as unknown as Promise<Array<CustomReturnType<T>>>;
+    return connection.country.updateMany(params) as unknown as Promise<
+      Array<CustomReturnType<T>>
+    >;
   }
 
-  delete(params: Prisma.CountryDeleteArgs, connection: Prisma.TransactionClient = database.write) {
+  delete(
+    params: Prisma.CountryDeleteArgs,
+    connection: Prisma.TransactionClient = database.write
+  ) {
     return connection.country.delete(params);
   }
 

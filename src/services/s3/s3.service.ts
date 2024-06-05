@@ -1,4 +1,4 @@
-import { CustomLogger, Logger } from '@providers/logger.provider';
+import { CustomLogger, Logger } from '@/providers/logger.provider.js';
 import {
   GetObjectCommand,
   PutObjectCommand,
@@ -7,15 +7,15 @@ import {
 import {
   InternalServerErrorException,
   NotFoundException,
-} from '@exceptions/http-exception';
-import { Redis } from '@services/redis/redis.interface';
-import { RedisService } from '@services/redis/redis.service';
-import { S3 } from '@services/s3/s3.interface';
-import { config } from '@providers/config.provider';
-import { dayjs } from '@utils/dayjs.util';
+} from '@/exceptions/http-exception.js';
+import { Redis } from '@/services/redis/redis.interface.js';
+import { RedisService } from '@/services/redis/redis.service.js';
+import { S3 } from '@/services/s3/s3.interface.js';
+import { config } from '@/providers/config.provider.js';
+import { dayjs } from '@/utils/dayjs.util.js';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { nanoid } from 'nanoid';
-import { typeToExtension } from '@utils/mime-types.util';
+import { typeToExtension } from '@/utils/mime-types.util.js';
 
 const client = new S3Client({
   apiVersion: 'v4',

@@ -1,4 +1,4 @@
-import { dayjs } from '@utils/dayjs.util';
+import { dayjs } from '@/utils/dayjs.util.js';
 
 type CommonResponseParams = {
   ID?: string;

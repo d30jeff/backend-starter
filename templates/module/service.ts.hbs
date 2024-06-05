@@ -1,9 +1,9 @@
-import { CustomLogger, Logger } from '@providers/logger.provider';
-import { {{pascalCase name}} } from '@servers/{{kebabCase server}}/{{kebabCase name}}/{{kebabCase name}}.interface';
+import { CustomLogger, Logger } from '@/providers/logger.provider';
+import { {{pascalCase name}} } from '@/servers/{{kebabCase server}}/{{kebabCase name}}/{{kebabCase name}}.interface';
 import { Prisma } from '@prisma/client';
-import { repositories } from '@repositories/index.repository';
-import { {{pascalCase name}}PublicSelect, {{pascalCase name}}WithPublicFields } from '@repositories/{{kebabCase name}}.repository';
-import { Pagination } from '@utils/pagination.util';
+import { repositories } from '@/repositories/index.repository';
+import { {{pascalCase name}}PublicSelect, {{pascalCase name}}WithPublicFields } from '@/repositories/{{kebabCase name}}.repository';
+import { Pagination } from '@/utils/pagination.util';
 
 export class {{pascalCase name}}Service {
   @Logger()

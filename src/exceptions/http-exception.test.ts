@@ -6,8 +6,8 @@ import {
   TooManyRequestsException,
   UnauthorizedException,
   UnprocessableEntityException,
-} from '@exceptions/http-exception';
-import { HttpStatus } from '@enums/http-status.enum';
+} from '@/exceptions/http-exception.js';
+import { HttpStatus } from '@/enums/http-status.enum.js';
 
 describe('Http Exception Test', () => {
   test('It Returns Expected 400 Response', () => {

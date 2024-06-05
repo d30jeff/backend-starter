@@ -1,6 +1,6 @@
-import { redis } from '@providers/redis.provider';
-import { dayjs } from '@utils/dayjs.util';
 import { Options, slowDown } from 'express-slow-down';
+import { dayjs } from '@/utils/dayjs.util.js';
+import { redis } from '@/providers/redis.provider.js';
 import RateLimitRedis from 'rate-limit-redis';
 
 export const globalSlowDown = (options: Pick<Options, 'delayAfter'>) => {

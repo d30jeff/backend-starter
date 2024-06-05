@@ -1,4 +1,4 @@
-import { config } from '@providers/config.provider';
+import { config } from '@/providers/config.provider.js';
 import Stripe from 'stripe';
 
 export const stripe = new Stripe(config.STRIPE_SECRET_KEY, {

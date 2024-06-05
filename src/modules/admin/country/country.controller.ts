@@ -1,3 +1,4 @@
+import { AuthenticatedAdmin } from '@/modules/admin/admin/admin.middleware.js';
 import {
   Controller,
   Delete,
@@ -9,15 +10,14 @@ import {
   Request,
   Response,
 } from '@decorators/express';
-import { HttpStatus } from '@enums/http-status.enum';
+import { CustomLogger, Logger } from '@/providers/logger.provider.js';
 import {
   ExpressNextFunction,
   ExpressRequest,
   ExpressResponse,
-} from '@interfaces/express.interface';
-import { AuthenticatedAdmin } from '@modules/admin/admin/admin.middleware';
-import { CustomLogger, Logger } from '@providers/logger.provider';
-import { serializePaginationParams } from '@utils/pagination.util';
+} from '@/interfaces/express.interface.js';
+import { HttpStatus } from '@/enums/http-status.enum.js';
+import { serializePaginationParams } from '@/utils/pagination.util.js';
 
 @Controller('/countries', [AuthenticatedAdmin])
 export class CountryController {

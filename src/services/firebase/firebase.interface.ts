@@ -1,4 +1,4 @@
-import { UserRecord } from 'firebase-admin/lib/auth/user-record';
+import firebase from 'firebase-admin';
 
 export namespace Firebase {
   export namespace DecodeToken {
@@ -8,6 +8,6 @@ export namespace Firebase {
   }
 
   export interface Interface {
-    decodeToken(params: DecodeToken.Params): Promise<UserRecord>;
+    decodeToken(params: DecodeToken.Params): Promise<firebase.auth.UserRecord>;
   }
 }

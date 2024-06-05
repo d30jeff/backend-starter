@@ -1,8 +1,8 @@
-import { countries } from '@datasource/countries';
-import { CustomLogger, Logger } from '@providers/logger.provider';
-import { generateID } from '@providers/nanoid.provider';
-import { CountryRepository } from '@repositories/country.repository';
+import { CountryRepository } from '@/repositories/country.repository.js';
+import { CustomLogger, Logger } from '@/providers/logger.provider.js';
 import { Service } from 'typedi';
+import { countries } from '@/datasource/countries.js';
+import { generateID } from '@/providers/nanoid.provider.js';
 
 @Service()
 export class CountryService {

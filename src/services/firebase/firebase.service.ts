@@ -1,10 +1,10 @@
-import { CustomLogger, Logger } from '@providers/logger.provider';
-import { Firebase } from '@services/firebase/firebase.interface';
+import { CustomLogger, Logger } from '@/providers/logger.provider.js';
+import { Firebase } from '@/services/firebase/firebase.interface.js';
 import { Service } from 'typedi';
 import firebase from 'firebase-admin';
 
 @Service()
-export class FirebaseService implements Firebase.Interface {
+export class FirebaseService {
   @Logger()
   private readonly logger: CustomLogger;
   private admin: firebase.app.App;
@@ -15,7 +15,9 @@ export class FirebaseService implements Firebase.Interface {
     });
   }
 
-  async decodeToken(params: Firebase.DecodeToken.Params) {
+  async decodeToken(
+    params: Firebase.DecodeToken.Params
+  ): Promise<firebase.auth.UserRecord> {
     const { token } = params;
     const user = await this.admin.auth().verifyIdToken(token);
     return this.admin.auth().getUser(user.uid);

@@ -1,12 +1,12 @@
-import { Admin } from '@modules/admin/admin/admin.interface';
-import { CustomLogger, Logger } from '@providers/logger.provider';
+import { Admin } from '@/modules/admin/admin/admin.interface.js';
 import {
   AdminPublicSelect,
   AdminRepository,
-} from '@repositories/admin.repository';
-import { EmailService } from '@services/email/email.service';
-import { FirebaseService } from '@services/firebase/firebase.service';
-import { Bcrypt } from '@utils/bcrypt.util';
+} from '@/repositories/admin.repository.js';
+import { Bcrypt } from '@/utils/bcrypt.util.js';
+import { CustomLogger, Logger } from '@/providers/logger.provider.js';
+import { EmailService } from '@/services/email/email.service.js';
+import { FirebaseService } from '@/services/firebase/firebase.service.js';
 import { Service } from 'typedi';
 
 @Service()

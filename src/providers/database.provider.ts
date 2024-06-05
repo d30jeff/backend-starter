@@ -1,9 +1,9 @@
 import { Prisma, PrismaClient } from '@prisma/client';
-import { SignaleLogger } from '@providers/logger.provider';
-import { StringUtil } from '@utils/string.util';
-import { config } from '@providers/config.provider';
-import { generateID } from '@providers/nanoid.provider';
-import { getExternalSignedURL } from '@utils/response.util';
+import { SignaleLogger } from '@/providers/logger.provider.js';
+import { StringUtil } from '@/utils/string.util.js';
+import { config } from '@/providers/config.provider.js';
+import { generateID } from '@/providers/nanoid.provider.js';
+import { getExternalSignedURL } from '@/utils/response.util.js';
 
 const logger = SignaleLogger('Prisma');
 const log: (Prisma.LogLevel | Prisma.LogDefinition)[] = [

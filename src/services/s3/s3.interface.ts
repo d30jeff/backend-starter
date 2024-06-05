@@ -1,4 +1,4 @@
-import { UnprocessableEntityException } from '@exceptions/http-exception';
+import { UnprocessableEntityException } from '@/exceptions/http-exception.js';
 
 export namespace S3 {
   export namespace Exceptions {

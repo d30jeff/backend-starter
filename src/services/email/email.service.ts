@@ -1,7 +1,7 @@
-import { CustomLogger, Logger } from '@providers/logger.provider';
+import { CustomLogger, Logger } from '@/providers/logger.provider.js';
 import { Service } from 'typedi';
+import { config } from '@/providers/config.provider.js';
 import nodemailer from 'nodemailer';
-import { config } from '@providers/config.provider';
 
 @Service()
 export class EmailService {

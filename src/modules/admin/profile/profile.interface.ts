@@ -1,5 +1,4 @@
-import { NotFoundException } from '@exceptions/http-exception';
-import { CommonResponse } from '@responses/common.response';
+import { NotFoundException } from '@/exceptions/http-exception.js';
 
 export namespace Profile {
   export namespace Exceptions {

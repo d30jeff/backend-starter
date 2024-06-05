@@ -1,4 +1,4 @@
-import { StringUtil } from '@utils/string.util';
+import { StringUtil } from '@/utils/string.util.js';
 import {
   Transform,
   TransformFnParams,

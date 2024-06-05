@@ -18,20 +18,6 @@
         "memberSyntaxSortOrder": ["none", "all", "multiple", "single"],
       },
     ],
-    // "import/order": [
-    //   "error",
-    //   {
-    //     "groups": [
-    //       "sibling",
-    //       "parent",
-    //       "internal",
-    //       "external",
-    //       "builtin",
-    //       "object",
-    //       "type",
-    //     ],
-    //   },
-    // ],
     "@typescript-eslint/no-empty-function": "warn",
     "@typescript-eslint/no-unused-vars": "warn",
     "no-return-await": "error",

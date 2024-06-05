@@ -1,7 +1,7 @@
-import { UnauthorizedException } from '@exceptions/http-exception';
-import { AdminWithPublicFields } from '@repositories/admin.repository';
-import { CommonResponse } from '@responses/common.response';
-import { IsDefined, IsEmail, MaxLength } from '@utils/class-validator.util';
+import { AdminWithPublicFields } from '@/repositories/admin.repository.js';
+import { CommonResponse } from '@/responses/common.response.js';
+import { IsDefined, IsEmail, MaxLength } from '@/utils/class-validator.util.js';
+import { UnauthorizedException } from '@/exceptions/http-exception.js';
 
 export namespace Admin {
   export class Response extends CommonResponse {

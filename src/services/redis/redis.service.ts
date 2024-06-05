@@ -1,6 +1,6 @@
-import { Redis } from '@services/redis/redis.interface';
+import { Redis } from '@/services/redis/redis.interface.js';
 import { Service } from 'typedi';
-import { redis } from '@providers/redis.provider';
+import { redis } from '@/providers/redis.provider.js';
 
 @Service()
 export class RedisService {

@@ -1,11 +1,11 @@
+import { BaseException } from '@/exceptions/base.exception.js';
 import { ErrorMiddleware } from '@decorators/express';
-import { HttpStatus } from '@enums/http-status.enum';
-import { BaseException } from '@exceptions/base.exception';
-import { SignaleLogger } from '@providers/logger.provider';
-import { dayjs } from '@utils/dayjs.util';
-import { getFormattedPath } from '@utils/request.util';
-import { ValidationError } from 'class-validator';
 import { ErrorRequestHandler, Request, Response } from 'express';
+import { HttpStatus } from '@/enums/http-status.enum.js';
+import { SignaleLogger } from '@/providers/logger.provider.js';
+import { ValidationError } from 'class-validator';
+import { dayjs } from '@/utils/dayjs.util.js';
+import { getFormattedPath } from '@/utils/request.util.js';
 
 const logger = SignaleLogger('Global Error Handler');
 
@@ -33,7 +33,10 @@ const extractPropertiesAndConstraint = (
 export class GlobalErrorMiddleware implements ErrorMiddleware {
   public use(e: Error, request: Request, response: Response) {
     const timestamp = dayjs().utc().format();
-    const error = e as unknown as ErrorRequestHandler & { statusCode: number; details: string };
+    const error = e as unknown as ErrorRequestHandler & {
+      statusCode: number;
+      details: string;
+    };
     logger.fatal(error);
 
     if (error.length && error.constructor === Array) {

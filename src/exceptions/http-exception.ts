@@ -1,7 +1,7 @@
-import { BaseException } from '@exceptions/base.exception';
-import { ErrorField } from '@interfaces/errors';
-import { HttpStatus } from '@enums/http-status.enum';
-import { StringUtil } from '@utils/string.util';
+import { BaseException } from '@/exceptions/base.exception.js';
+import { ErrorField } from '@/interfaces/errors.js';
+import { HttpStatus } from '@/enums/http-status.enum.js';
+import { StringUtil } from '@/utils/string.util.js';
 
 export interface HttpExceptionProps {
   status: HttpStatus;
