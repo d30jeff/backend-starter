@@ -1,7 +1,31 @@
 ### Backend Starter
-Backend Starter in TypeScript, Express, DI, Prisma, Docker
 
-**Stack**
+Opinionated Node.js backend starter written in Express and TypeScript.
+
+### Default commands
+
+| Command                                                      | Description                     |
+| :----------------------------------------------------------- | :------------------------------ |
+| `yarn start <server>:<mode>` <br> e.g `yarn start admin:dev` | Runs given server in given mode |
+|Hello|World|
+
+**Included**
+
+### Database
+
+- Prisma
+- Stripe-like ID
+- Repository pattern
+
+e.g. `user_<NANO_ID>`
+
+### Application
+
+- Global rate limiting
+- HTTP handler level rate limiting
+- Global slow down
+- HTTP handler level slow down
+- Custom Response
 
 ### Setup dotenv file
 
@@ -21,13 +45,13 @@ Backend Starter in TypeScript, Express, DI, Prisma, Docker
 
 ### Running
 
-`yarn start <module>:<mode>`
+`yarn start <server>:<mode>`
 
-Where module is the entrypoint point in ./src/servers
+Where server is the entrypoint point in ./src/servers
 
 e.g.
-
 `yarn start admin:dev`
 
 ### Entrypoint
+
 Please check main.js

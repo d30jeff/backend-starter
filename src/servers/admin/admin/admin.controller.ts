@@ -1,5 +1,5 @@
-import { Admin } from '@/modules/admin/admin/admin.interface.js';
-import { AdminService } from '@/modules/admin/admin/admin.service.js';
+import { Admin } from '@/servers/admin/admin/admin.interface.js';
+import { AdminService } from '@/servers/admin/admin/admin.service.js';
 import { Container } from 'typedi';
 import {
   Controller,

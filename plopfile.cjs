@@ -1,8 +1,9 @@
-import { ActionType, NodePlopAPI } from 'plop';
-import { join } from 'path';
-import fs from 'fs';
+const { join } = require('path');
+const fs = require('fs');
 
-export default function (plop: NodePlopAPI) {
+module.exports = function (
+  /** @type {import('plop').NodePlopAPI} */
+  plop) {
   const modules = fs.readdirSync(join(__dirname, './src/modules'));
   plop.load('plop-pack-json-modify');
 
@@ -62,7 +63,7 @@ export default function (plop: NodePlopAPI) {
       },
     ],
     actions: (data) => {
-      const items: ActionType[] = [];
+      const items = [];
       if (data?.type === 'server') {
         createServer(data, items);
       } else if (data?.type === 'module') {
@@ -72,9 +73,9 @@ export default function (plop: NodePlopAPI) {
       return items;
     },
   });
-}
+};
 
-const createServer = (data: any, items: ActionType[]) => {
+const createServer = (data, items) => {
   const port = Number(data?.port);
 
   items.push(
@@ -150,7 +151,7 @@ const createServer = (data: any, items: ActionType[]) => {
   );
 };
 
-const createModule = (data: any, items: ActionType[]) => {
+const createModule = (data, items) => {
   items.push(
     {
       type: 'add',

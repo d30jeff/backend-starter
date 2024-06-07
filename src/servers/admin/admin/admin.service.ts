@@ -1,4 +1,4 @@
-import { Admin } from '@/modules/admin/admin/admin.interface.js';
+import { Admin } from '@/servers/admin/admin/admin.interface.js';
 import {
   AdminPublicSelect,
   AdminRepository,

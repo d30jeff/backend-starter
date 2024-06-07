@@ -1,4 +1,4 @@
-import { AuthenticatedAdmin } from '@/modules/admin/admin/admin.middleware.js';
+import { AuthenticatedAdmin } from '@/servers/admin/admin/admin.middleware.js';
 import {
   Controller,
   Delete,

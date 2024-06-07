@@ -5,7 +5,7 @@ const { Signale } = require('signale');
 
 const args = process.argv.slice(2).toString();
 
-const MODULES = fs.readdirSync(join(__dirname, './src/modules'));
+const SERVERS = fs.readdirSync(join(__dirname, './src/servers'));
 
 const [server, env = 'dev'] = args.split(':');
 
@@ -28,10 +28,10 @@ const ENVIRONMENTS = [
   },
 ];
 
-const isValidModule = MODULES.includes(server);
+const isValidServer = SERVERS.includes(server);
 
-if (!isValidModule) {
-  console.info('Invalid Server', MODULES);
+if (!isValidServer) {
+  console.info('Invalid Server', SERVERS);
   process.exit();
 }
 
@@ -62,23 +62,10 @@ if (environment.name.toLowerCase() === 'development') {
 }
 
 async function copyTemplateFiles() {
-  const prepare = spawn('cp -r ./src/templates/* dist/templates/', {
-    shell: true,
-  });
-
-  prepare.stdout.on('data', (data) => {
-    logger.info(data);
-  });
-
-  prepare.stderr.on('data', (data) => {
-    logger.fatal(data);
-  });
-
-  prepare.on('close', (code) => {
-    if (code === 0) {
-      logger.info('Done copying template files');
-    }
-  });
+  fs.cpSync('./src/templates', 'dist/templates', {
+    recursive: true,
+  })
+  logger.success('Finished copying template files');
 }
 
 async function prepare(cb) {
@@ -112,7 +99,7 @@ async function main() {
     },
   };
 
-  const script = `node -r tsconfig-paths/register -r source-map-support/register ./dist/modules/${server}/${server}.server.js`;
+  const script = `node -r tsconfig-paths/register -r source-map-support/register ./dist/servers/${server}/${server}.server.js`;
 
   if (['development', 'dev'].includes(env)) {
     logger.log(`Running ${server} in development mode. \n ${script}`);
