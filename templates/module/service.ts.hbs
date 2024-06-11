@@ -1,24 +1,31 @@
-import { CustomLogger, Logger } from '@/providers/logger.provider';
-import { {{pascalCase name}} } from '@/servers/{{kebabCase server}}/{{kebabCase name}}/{{kebabCase name}}.interface';
+import { CustomLogger, Logger } from '@/providers/logger.provider.js';
+import { {{pascalCase name}} } from '@/servers/{{kebabCase server}}/{{kebabCase name}}/{{kebabCase name}}.interface.js';
 import { Prisma } from '@prisma/client';
-import { repositories } from '@/repositories/index.repository';
-import { {{pascalCase name}}PublicSelect, {{pascalCase name}}WithPublicFields } from '@/repositories/{{kebabCase name}}.repository';
-import { Pagination } from '@/utils/pagination.util';
+import {
+  {{pascalCase name}}Repository,
+  {{pascalCase name}}PublicSelect,
+  {{pascalCase name}}WithPublicFields
+} from '@/repositories/{{kebabCase name}}.repository.js';
+import { Pagination } from '@/utils/pagination.util.js';
+import { Service } from 'typedi';
 
+@Service()
 export class {{pascalCase name}}Service {
   @Logger()
   private readonly logger: CustomLogger;
 
-  async create(params: {{pascalCase name}}.CreateParams) {
+  constructor(private readonly {{kebabCase name}}Repository: {{pascalCase name}}Repository) {}
+
+  async create(params: {{pascalCase name}}.Create.Params) {
     const {} = params;
 
-    return repositories.{{camelCase name}}.create<{{pascalCase name}}PublicSelect>({
+    return this.{{kebabCase name}}Repository.create<{{pascalCase name}}PublicSelect>({
       select: {{pascalCase name}}PublicSelect,
       data: {} as Prisma.{{pascalCase name}}CreateInput,
     });
   }
 
-  async list(params: {{pascalCase name}}.ListParams) {
+  async list(params: {{pascalCase name}}.List.Params) {
     const { page, limit, account } = params;
 
     const AND: Prisma.Enumerable<Prisma.{{pascalCase name}}WhereInput> = [];
@@ -27,8 +34,8 @@ export class {{pascalCase name}}Service {
       ...where,
       AND,
     };
-    const total = await repositories.{{camelCase name}}.count({ where });
-    const items = await repositories.{{camelCase name}}.findMany<{{pascalCase name}}PublicSelect>({
+    const total = await this.{{kebabCase name}}Repository.count({ where });
+    const items = await this.{{kebabCase name}}Repository.findMany<{{pascalCase name}}PublicSelect>({
       select: {{pascalCase name}}PublicSelect,
       skip: (page - 1) * limit,
       take: limit,
@@ -45,10 +52,10 @@ export class {{pascalCase name}}Service {
     };
   }
 
-  async findOne(params: {{pascalCase name}}.FindOneParams) {
+  async findOne(params: {{pascalCase name}}.FindOne.Params) {
     const { ID, account } = params;
 
-    return repositories.{{camelCase name}}.findFirst<{{pascalCase name}}PublicSelect>({
+    return this.{{kebabCase name}}Repository.findFirst<{{pascalCase name}}PublicSelect>({
       select: {{pascalCase name}}PublicSelect,
       where: {
         ID,
@@ -56,10 +63,10 @@ export class {{pascalCase name}}Service {
     });
   }
 
-  async update(params: {{pascalCase name}}.UpdateParams) {
+  async update(params: {{pascalCase name}}.Update.Params) {
     const { ID, account } = params;
 
-    return repositories.{{camelCase name}}.update<{{pascalCase name}}PublicSelect>({
+    return this.{{kebabCase name}}Repository.update<{{pascalCase name}}PublicSelect>({
       select: {{pascalCase name}}PublicSelect,
       data: {},
       where: {
@@ -68,9 +75,9 @@ export class {{pascalCase name}}Service {
     });
   }
 
-  async delete(params: {{pascalCase name}}.DeleteParams) {
+  async delete(params: {{pascalCase name}}.Delete.Params) {
     const { ID, account } = params;
-    return repositories.{{camelCase name}}.delete({
+    return this.{{kebabCase name}}Repository.delete({
       where: {
         ID,
       },

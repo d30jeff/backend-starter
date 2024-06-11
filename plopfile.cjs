@@ -4,11 +4,10 @@ const fs = require('fs');
 module.exports = function (
   /** @type {import('plop').NodePlopAPI} */
   plop) {
-  const modules = fs.readdirSync(join(__dirname, './src/modules'));
+  const servers = fs.readdirSync(join(__dirname, './src/servers'));
   plop.load('plop-pack-json-modify');
 
   plop.setGenerator('Generator', {
-    description: 'Generates a module based on user input',
     prompts: [
       {
         type: 'list',
@@ -34,7 +33,7 @@ module.exports = function (
       },
       {
         type: 'list',
-        choices: modules,
+        choices: servers,
         name: 'server',
         message: 'Which server should the module be created in?',
         when(answers) {
@@ -91,35 +90,8 @@ const createServer = (data, items) => {
     },
     {
       type: 'add',
-      path: 'src/servers/{{kebabCase server}}/{{kebabCase server}}.services.ts',
-      templateFile: 'templates/servers/services.ts.hbs',
-    },
-    {
-      type: 'add',
       path: 'src/servers/{{kebabCase server}}/healthcheck/healthcheck.controller.ts',
-      templateFile:
-        'templates/servers/healthcheck/healthcheck.controller.ts.hbs',
-    },
-    {
-      type: 'add',
-      path: 'src/servers/{{kebabCase server}}/account/account.controller.ts',
-      templateFile: 'templates/servers/account/account.controller.ts.hbs',
-    },
-    {
-      type: 'add',
-      path: 'src/servers/{{kebabCase server}}/profile/profile.controller.ts',
-      templateFile: 'templates/servers/profile/profile.controller.ts.hbs',
-    },
-    {
-      type: 'add',
-      path: 'src/servers/{{kebabCase server}}/preference/preference.controller.ts',
-      templateFile: 'templates/servers/preference/preference.controller.ts.hbs',
-    },
-    {
-      type: 'add',
-      path: 'src/servers/{{kebabCase server}}/device-token/device-token.controller.ts',
-      templateFile:
-        'templates/servers/device-token/device-token.controller.ts.hbs',
+      templateFile: 'templates/servers/healthcheck/healthcheck.controller.ts.hbs',
     },
     {
       // Modify .env file
@@ -159,24 +131,9 @@ const createModule = (data, items) => {
       templateFile: 'templates/module/middleware.ts.hbs',
     },
     {
-      type: 'add',
-      path: 'src/servers/{{kebabCase server}}/{{kebabCase name}}/{{kebabCase name}}.dto.ts',
-      templateFile: 'templates/module/dto.ts.hbs',
-    },
-    {
-      type: 'add',
-      path: 'src/servers/{{kebabCase server}}/{{kebabCase name}}/{{kebabCase name}}.response.ts',
-      templateFile: 'templates/module/response.ts.hbs',
-    },
-    {
-      type: 'add',
-      path: 'src/servers/{{kebabCase server}}/{{kebabCase name}}/{{kebabCase name}}.exception.ts',
-      templateFile: 'templates/module/exception.ts.hbs',
-    },
-    {
       type: 'modify',
-      pattern: ".controller';",
-      template: `.controller';\nimport { {{pascalCase name}}Controller } from '@/servers/{{kebabCase server}}/{{kebabCase name}}/{{kebabCase name}}.controller';`,
+      pattern: ".controller.js';",
+      template: `.controller.js';\nimport { {{pascalCase name}}Controller } from '@/servers/{{kebabCase server}}/{{kebabCase name}}/{{kebabCase name}}.controller.js';`,
       path: 'src/servers/{{kebabCase server}}/{{kebabCase server}}.controllers.ts',
     },
     {
@@ -185,18 +142,6 @@ const createModule = (data, items) => {
       template: `export const controllers = [\n  {{pascalCase name}}Controller,`,
       path: 'src/servers/{{kebabCase server}}/{{kebabCase server}}.controllers.ts',
     },
-    {
-      type: 'modify',
-      pattern: 'export const services = {',
-      template: `import { {{pascalCase name}}Service } from '@/servers/{{kebabCase server}}/{{kebabCase name}}/{{kebabCase name}}.service';\nexport const services = {`,
-      path: 'src/servers/{{kebabCase server}}/{{kebabCase server}}.services.ts',
-    },
-    {
-      type: 'modify',
-      pattern: 'export const services = {',
-      template: `export const services = {  {{camelCase name}}: new {{pascalCase name}}Service(),\n`,
-      path: 'src/servers/{{kebabCase server}}/{{kebabCase server}}.services.ts',
-    }
   );
 
   items.push({
@@ -221,31 +166,6 @@ const createModule = (data, items) => {
         type: 'add',
         path: 'src/repositories/{{kebabCase name}}.repository.ts',
         templateFile: 'templates/repository.ts.hbs',
-      },
-      {
-        type: 'modify',
-        pattern: ".repository';",
-        template: `.repository';\nimport { {{pascalCase name}}Repository } from '@/repositories/{{kebabCase name}}.repository';`,
-        path: 'src/repositories/index.repository.ts',
-      },
-      {
-        type: 'modify',
-        pattern: 'export const repositories = {',
-        template: `export const repositories = {\n  {{camelCase name}}: new {{pascalCase name}}Repository(),`,
-        path: 'src/repositories/index.repository.ts',
-      }
-    );
-  } else {
-    items.push(
-      {
-        type: 'add',
-        path: 'src/servers/{{kebabCase server}}/{{kebabCase name}}/{{kebabCase name}}.controller.ts',
-        templateFile: 'templates/module/blank-controller.ts.hbs',
-      },
-      {
-        type: 'add',
-        path: 'src/servers/{{kebabCase server}}/{{kebabCase name}}/{{kebabCase name}}.service.ts',
-        templateFile: 'templates/module/blank-service.ts.hbs',
       }
     );
   }

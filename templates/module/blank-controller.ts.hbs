@@ -1,4 +1,4 @@
-import { serializePaginationParams } from '@/utils/pagination.util';
+import { serializePaginationParams } from '@/utils/pagination.util.js';
 import {
   ExpressNextFunction,
   ExpressRequest,
@@ -15,8 +15,6 @@ import {
   Request,
   Response,
 } from '@decorators/express';
-import { Create{{pascalCase name}}Dto, Update{{pascalCase name}}Dto } from '@/servers/{{kebabCase server}}/{{kebabCase name}}/{{kebabCase name}}.dto';
-import { {{pascalCase name}}Response } from '@/servers/{{kebabCase server}}/{{kebabCase name}}/{{kebabCase name}}.response';
 import { CustomLogger, Logger } from '@/providers/logger.provider';
 import { validate } from '@/utils/class-validator.util';
 import { services } from '@/servers/{{kebabCase server}}/{{kebabCase server}}.services';

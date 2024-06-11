@@ -1,9 +1,6 @@
-import { serializePaginationParams } from '@/utils/pagination.util';
-import {
-  ExpressNextFunction,
-  ExpressRequest,
-  ExpressResponse,
-} from '@/interfaces/express.interface';
+import { {{pascalCase name}} } from '@/servers/{{kebabCase server}}/{{kebabCase name}}/{{kebabCase name}}.interface.js';
+import { {{pascalCase name}}Service } from '@/servers/{{kebabCase server}}/{{kebabCase name}}/{{kebabCase name}}.service.js';
+import { Container } from 'typedi';
 import {
   Controller,
   Delete,
@@ -15,17 +12,22 @@ import {
   Request,
   Response,
 } from '@decorators/express';
-import { Create{{pascalCase name}}Dto, Update{{pascalCase name}}Dto } from '@/servers/{{kebabCase server}}/{{kebabCase name}}/{{kebabCase name}}.dto';
-import { {{pascalCase name}}Response } from '@/servers/{{kebabCase server}}/{{kebabCase name}}/{{kebabCase name}}.response';
-import { CustomLogger, Logger } from '@/providers/logger.provider';
-import { validate } from '@/utils/class-validator.util';
-import { services } from '@/servers/{{kebabCase server}}/{{kebabCase server}}.services';
-import { HttpStatus } from '@/enums/http-status.enum';
+import { CustomLogger, Logger } from '@/providers/logger.provider.js';
+import {
+  ExpressNextFunction,
+  ExpressRequest,
+  ExpressResponse,
+} from '@/interfaces/express.interface.js';
+import { HttpStatus } from '@/enums/http-status.enum.js';
+import { serializePaginationParams } from '@/utils/pagination.util.js';
+import { validate } from '@/utils/class-validator.util.js';
 
 @Controller('/')
 export class {{pascalCase name}}Controller {
   @Logger()
   private readonly logger: CustomLogger;
+
+  private readonly {{camelCase name}}Service = Container.get({{pascalCase name}}Service);
 
   @Post('/')
   async create(
@@ -34,13 +36,16 @@ export class {{pascalCase name}}Controller {
     @Next() next: ExpressNextFunction
   ) {
     try {
-      const body = await validate<Create{{pascalCase name}}Dto>(Create{{pascalCase name}}Dto, request.body);
-      const data = await services.{{camelCase name}}.create({
+      const body = await validate<{{pascalCase name}}.Create.Dto>(
+        {{pascalCase name}}.Create.Dto,
+        request.body
+      );
+      const data = await this.{{camelCase name}}Service.create({
         ...body,
         account: request.session.account,
       });
 
-      return response.status(HttpStatus.Created).json(new {{pascalCase name}}Response(data));
+      return response.status(HttpStatus.Created).json(new {{pascalCase name}}.Response(data));
     } catch (error) {
       this.logger.fatal(error);
       next(error);
@@ -56,7 +61,7 @@ export class {{pascalCase name}}Controller {
     try {
       const { page, limit } = serializePaginationParams(request);
 
-      const { items, pagination } = await services.{{camelCase name}}.list({
+      const { items, pagination } = await this.{{camelCase name}}Service.list({
         page,
         limit,
         account: request.session.account,
@@ -64,7 +69,7 @@ export class {{pascalCase name}}Controller {
 
       return response.status(HttpStatus.Ok).json({
         items: items.map((item) => {
-          return new {{pascalCase name}}Response(item);
+          return new {{pascalCase name}}.Response(item);
         }),
         pagination,
       });
@@ -82,12 +87,12 @@ export class {{pascalCase name}}Controller {
     @Next() next: ExpressNextFunction
   ) {
     try {
-      const data = await services.{{camelCase name}}.findOne({
+      const data = await this.{{camelCase name}}Service.findOne({
         ID,
         account: request.session.account,
       });
 
-      return response.status(HttpStatus.Ok).json(new {{pascalCase name}}Response(data));
+      return response.status(HttpStatus.Ok).json(new {{pascalCase name}}.Response(data));
     } catch (error) {
       this.logger.fatal(error);
       next(error);
@@ -102,14 +107,18 @@ export class {{pascalCase name}}Controller {
     @Next() next: ExpressNextFunction
   ) {
     try {
-      const body = await validate<Update{{pascalCase name}}Dto>(Update{{pascalCase name}}Dto, request.body);
-      const data = await services.{{camelCase name}}.update({
+      const body = await validate<{{pascalCase name}}.Update.Dto>(
+        {{pascalCase name}}.Update.Dto,
+        request.body
+      );
+
+      const data = await this.{{camelCase name}}Service.update({
         ...body,
         ID,
         account: request.session.account,
       });
 
-      return response.status(HttpStatus.Ok).json(new {{pascalCase name}}Response(data));
+      return response.status(HttpStatus.Ok).json(new {{pascalCase name}}.Response(data));
     } catch (error) {
       this.logger.fatal(error);
       next(error);
@@ -124,7 +133,7 @@ export class {{pascalCase name}}Controller {
     @Next() next: ExpressNextFunction
   ) {
     try {
-      await services.{{camelCase name}}.delete({
+      await this.{{camelCase name}}Service.delete({
         ID,
         account: request.session.account,
       });

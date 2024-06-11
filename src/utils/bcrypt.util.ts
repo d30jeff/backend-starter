@@ -8,7 +8,10 @@ export class Bcrypt {
     return bcrypt.hash(password, saltRound);
   }
 
-  static ComparePasswords(passwordClaim: string, passwordHash: string): Promise<boolean> {
+  static ComparePasswords(
+    passwordClaim: string,
+    passwordHash: string
+  ): Promise<boolean> {
     return bcrypt.compare(passwordClaim, passwordHash);
   }
 }
