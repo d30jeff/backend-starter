@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "plop": "NODE_ENV=development plop",
+    "plop": "cross-env NODE_ENV=development plop --plopfile plopfile.cjs",
     "build": "rimraf dist && tsc && tsc-alias -p tsconfig.json",
     "pack:staging": "docker compose -f docker-compose.staging.yml build",
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --detectOpenHandles --logHeapUsage",
@@ -116,7 +116,8 @@
   },
   "optionalDependencies": {
     "husky": "^9.0.11",
-    "lint-staged": "^15.2.5"
+    "lint-staged": "^15.2.5",
+    "rimraf": "^5.0.7"
   },
   "husky": {
     "hooks": {
@@ -148,5 +149,6 @@
     "@services": "./dist/services",
     "@test": "./dist/test",
     "@utils": "./dist/utils"
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
 }
