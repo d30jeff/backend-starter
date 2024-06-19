@@ -1,6 +1,7 @@
 import {
   BadRequestException,
   ConflictException,
+  ForbiddenException,
   InternalServerErrorException,
   NotFoundException,
   TooManyRequestsException,
@@ -21,6 +22,12 @@ describe('Http Exception Test', () => {
     const exception = new UnauthorizedException('Invalid Credentials');
     expect(exception.code).toBe('InvalidCredentials');
     expect(exception.statusCode).toBe(HttpStatus.Unauthorized);
+  });
+
+  test('It Returns Expected 403 Response', () => {
+    const exception = new ForbiddenException('Forbidden');
+    expect(exception.code).toBe('Forbidden');
+    expect(exception.statusCode).toBe(HttpStatus.Forbidden);
   });
 
   test('It Returns Expected 404 Response', () => {
