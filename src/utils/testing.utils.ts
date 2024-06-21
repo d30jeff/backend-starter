@@ -10,7 +10,7 @@ export const resetRedis = async () => {
   await resetRedisByKey('*');
 };
 
-export const resetRedisByKey = async (pattern) => {
+export const resetRedisByKey = async (pattern: string) => {
   const keys = await redis.keys(pattern);
   for (const key of keys) {
     await redis.del(key);

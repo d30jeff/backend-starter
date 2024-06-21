@@ -7,7 +7,7 @@ Opinionated Node.js backend starter written in Express and TypeScript.
 | Command                                                      | Description                     |
 | :----------------------------------------------------------- | :------------------------------ |
 | `yarn start <server>:<mode>` <br> e.g `yarn start admin:dev` | Runs given server in given mode |
-|Hello|World|
+| Hello                                                        | World                           |
 
 **Included**
 

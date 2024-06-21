@@ -68,7 +68,7 @@ const middleware = async (params: Prisma.MiddlewareParams, next) => {
     ['create', 'createMany', 'upsert'].includes(params.action) &&
     (params.args.data || params.args.create)
   ) {
-    let data = [];
+    let data: any[] = [];
     if (params.args.create && params.action === 'upsert') {
       data = [params.args.create];
     } else if (params.args.data.constructor === Array) {
@@ -78,7 +78,9 @@ const middleware = async (params: Prisma.MiddlewareParams, next) => {
     }
 
     for (const d of data) {
-      d.ID = generateID(StringUtil.SnakeCase(params.model));
+      if (params.model) {
+        d.ID = generateID(StringUtil.SnakeCase(params.model));
+      }
     }
   }
 

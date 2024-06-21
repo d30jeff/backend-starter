@@ -12,7 +12,7 @@ type CommonResponseParams = {
 
 export class CommonResponse {
   ID?: string;
-  createdAt?: string;
+  createdAt?: string | null;
   updatedAt?: string;
   pictureURL?: string;
   documentURL?: string;

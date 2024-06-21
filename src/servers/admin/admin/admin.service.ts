@@ -1,5 +1,6 @@
 import { Admin } from '@/servers/admin/admin/admin.interface.js';
 import {
+  AdminPrivateSelect,
   AdminPublicSelect,
   AdminRepository,
 } from '@/repositories/admin.repository.js';
@@ -31,14 +32,14 @@ export class AdminService implements Admin.Interface {
     });
   }
 
-  async findByEmail(email: string) {
-    return this.adminRepository.findFirst<AdminPublicSelect>({
-      select: AdminPublicSelect,
-      where: {
-        email,
-      },
-    });
-  }
+  // async findByEmail(email: string) {
+  //   return this.adminRepository.findFirst<AdminPublicSelect>({
+  //     select: AdminPublicSelect,
+  //     where: {
+  //       email,
+  //     },
+  //   });
+  // }
 
   async create(params: Admin.Create.Params) {
     const {} = params;
@@ -47,7 +48,12 @@ export class AdminService implements Admin.Interface {
   async signIn(params: Admin.SignIn.Params) {
     const { email, password } = params;
 
-    const admin = await this.findByEmail(email);
+    const admin = await this.adminRepository.findFirst<AdminPrivateSelect>({
+      select: AdminPrivateSelect,
+      where: {
+        email,
+      },
+    });
 
     if (
       !admin ||

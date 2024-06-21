@@ -1,11 +1,16 @@
-require('source-map-support').install(); import { createApplication } from
-'@/providers/application.provider'; import { config } from
-'@/providers/config.provider'; import { controllers } from '@/servers/{{kebabCase
-  server
-}}/{{kebabCase server}}.controllers'; async function main() { const { app,
-logger } = await createApplication({ name: '{{titleCase server}}', controllers,
-origin: [], staticPaths: [ { prefix: '/', path: 'docs/{{kebabCase server}}', },
-], }); app.listen(config.{{constantCase server}}_PORT, async () => {
-logger.success(`{{titleCase server}}
-is running on port ${config.{{constantCase server}}_PORT} 🚀`, { ...config, });
-}); } main();
+import { createApplication } from '@/providers/application.provider.js';
+import { config } from '@/providers/config.provider.js';
+import { controllers } from '@/servers/{{kebabCase server}}/{{kebabCase server}}.controllers.js';
+async function main() {
+  const { app, logger } = await createApplication({
+    name: '{{titleCase server}}',
+    controllers,
+    origin: [],
+    staticPaths: [ { prefix: '/', path: 'docs/{{kebabCase server}}', enable: config.IS_DEVELOPMENT }],
+  });
+
+  app.listen(config.{{constantCase server}}_PORT, async () => {
+    logger.success(`{{titleCase server}} is running on port ${config.{{constantCase server}}_PORT} 🚀`, { ...config, });
+  });
+
+} main();

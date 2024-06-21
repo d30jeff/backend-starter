@@ -5,30 +5,20 @@ dotenv.config();
 
 export const config = {
   NODE_ENV: process.env.NODE_ENV,
+  SCHOOL_PORT: Number(process.env.SCHOOL_PORT),
   IS_DEVELOPMENT: environment.toLowerCase() === 'development',
   IS_TESTING: environment.toLowerCase() === 'testing',
   IS_STAGING: environment.toLowerCase() === 'staging',
   IS_PRODUCTION: environment.toLowerCase() === 'production',
   BATCH_COUNT: 100,
 
-  CONSUMER_PORT: Number(process.env.CONSUMER_PORT),
-  CONSUMER_FRONTEND_HOSTNAME: process.env.CONSUMER_FRONTEND_HOSTNAME,
-
   ADMIN_PORT: Number(process.env.ADMIN_PORT),
   ADMIN_FRONTEND_HOSTNAME: process.env.ADMIN_FRONTEND_HOSTNAME,
 
-  PUBLIC_PORT: Number(process.env.PUBLIC_PORT),
-  PUBLIC_FRONTEND_HOSTNAME: process.env.PUBLIC_FRONTEND_HOSTNAME,
-
   SENDER_EMAIL: process.env.SENDER_EMAIL,
-
-  ADMIN_EMAIL: process.env.ADMIN_EMAIL,
-
-  DATABASE_ENCRYPTION_KEY: process.env.DATABASE_ENCRYPTION_KEY,
+  // ADMIN_EMAIL: process.env.ADMIN_EMAIL,
   DATABASE_URL: process.env.DATABASE_URL,
   DATABASE_READ_REPLICA_URL: process.env.DATABASE_READ_REPLICA_URL,
-
-  GOOGLE_APPLICATION_CREDENTIALS: process.env.GOOGLE_APPLICATION_CREDENTIALS,
 
   REDIS_URL: process.env.REDIS_URL,
 

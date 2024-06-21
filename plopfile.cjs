@@ -3,7 +3,8 @@ const fs = require('fs');
 
 module.exports = function (
   /** @type {import('plop').NodePlopAPI} */
-  plop) {
+  plop
+) {
   const servers = fs.readdirSync(join(__dirname, './src/servers'));
   plop.load('plop-pack-json-modify');
 
@@ -142,31 +143,20 @@ const createModule = (data, items) => {
       template: `export const controllers = [\n  {{pascalCase name}}Controller,`,
       path: 'src/servers/{{kebabCase server}}/{{kebabCase server}}.controllers.ts',
     },
+    {
+      type: 'add',
+      path: 'src/servers/{{kebabCase server}}/{{kebabCase name}}/{{kebabCase name}}.interface.ts',
+      templateFile: 'templates/module/interface.ts.hbs',
+    },
+    {
+      type: 'add',
+      path: 'src/servers/{{kebabCase server}}/{{kebabCase name}}/{{kebabCase name}}.controller.ts',
+      templateFile: 'templates/module/controller.ts.hbs',
+    },
+    {
+      type: 'add',
+      path: 'src/servers/{{kebabCase server}}/{{kebabCase name}}/{{kebabCase name}}.service.ts',
+      templateFile: 'templates/module/service.ts.hbs',
+    },
   );
-
-  items.push({
-    type: 'add',
-    path: 'src/servers/{{kebabCase server}}/{{kebabCase name}}/{{kebabCase name}}.interface.ts',
-    templateFile: 'templates/module/interface.ts.hbs',
-  });
-
-  if (data?.repository) {
-    items.push(
-      {
-        type: 'add',
-        path: 'src/servers/{{kebabCase server}}/{{kebabCase name}}/{{kebabCase name}}.controller.ts',
-        templateFile: 'templates/module/controller.ts.hbs',
-      },
-      {
-        type: 'add',
-        path: 'src/servers/{{kebabCase server}}/{{kebabCase name}}/{{kebabCase name}}.service.ts',
-        templateFile: 'templates/module/service.ts.hbs',
-      },
-      {
-        type: 'add',
-        path: 'src/repositories/{{kebabCase name}}.repository.ts',
-        templateFile: 'templates/repository.ts.hbs',
-      }
-    );
-  }
 };

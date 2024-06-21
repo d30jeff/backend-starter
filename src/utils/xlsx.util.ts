@@ -1,8 +1,9 @@
+import { Stream } from 'node:stream';
 import XLSX from 'xlsx';
 
-export const streamToBuffer = (stream) => {
+export const streamToBuffer = (stream: Stream) => {
   return new Promise((resolve, reject) => {
-    const chunks = [];
+    const chunks: any[] = [];
     stream.on('data', (chunk) => {
       chunks.push(chunk);
     });

@@ -5,7 +5,6 @@ import { database } from '@/providers/database.provider.js';
 const fields = {
   ID: true,
   email: true,
-  passwordHash: true,
   createdAt: true,
   updatedAt: true,
 } satisfies Prisma.AdminSelect;
@@ -17,7 +16,10 @@ export type AdminWithPublicFields = Prisma.AdminGetPayload<{
   select: typeof AdminPublicSelect;
 }>;
 
-export const AdminPrivateSelect = { ...fields } satisfies Prisma.AdminSelect;
+export const AdminPrivateSelect = {
+  ...fields,
+  passwordHash: true,
+} satisfies Prisma.AdminSelect;
 export type AdminPrivateSelect = typeof AdminPrivateSelect;
 
 export type AdminWithPrivateFields = Prisma.AdminGetPayload<{
@@ -40,7 +42,7 @@ export class AdminRepository {
     return connection.admin.aggregate(params);
   }
 
-  upsert<T>(
+  upsert<T extends Prisma.AdminSelect>(
     params: Prisma.AdminUpsertArgs,
     connection: Prisma.TransactionClient = database.write
   ): Promise<CustomReturnType<T>> {
@@ -49,7 +51,7 @@ export class AdminRepository {
     >;
   }
 
-  create<T>(
+  create<T extends Prisma.AdminSelect>(
     params: Omit<Prisma.AdminCreateArgs, 'data'> & {
       data?: Omit<Prisma.AdminCreateInput, 'ID'> & { ID?: string };
     },
@@ -60,7 +62,7 @@ export class AdminRepository {
     ) as unknown as Promise<CustomReturnType<T>>;
   }
 
-  createMany<T>(
+  createMany<T extends Prisma.AdminSelect>(
     params: Omit<Prisma.AdminCreateManyArgs, 'data'> & {
       data?: Array<Omit<Prisma.AdminCreateManyInput, 'ID'> & { ID?: string }>;
     },
@@ -71,7 +73,7 @@ export class AdminRepository {
     ) as unknown as Promise<Array<CustomReturnType<T>>>;
   }
 
-  findFirst<T>(
+  findFirst<T extends Prisma.AdminSelect>(
     params: Prisma.AdminFindFirstArgs,
     connection: Prisma.TransactionClient = database.read
   ): Promise<CustomReturnType<T>> {
@@ -80,7 +82,7 @@ export class AdminRepository {
     >;
   }
 
-  findMany<T>(
+  findMany<T extends Prisma.AdminSelect>(
     params: Prisma.AdminFindManyArgs,
     connection: Prisma.TransactionClient = database.read
   ): Promise<Array<CustomReturnType<T>>> {
@@ -96,7 +98,7 @@ export class AdminRepository {
     return connection.admin.count(params);
   }
 
-  update<T>(
+  update<T extends Prisma.AdminSelect>(
     params: Prisma.AdminUpdateArgs,
     connection: Prisma.TransactionClient = database.write
   ): Promise<CustomReturnType<T>> {
@@ -105,7 +107,7 @@ export class AdminRepository {
     >;
   }
 
-  updateMany<T>(
+  updateMany<T extends Prisma.AdminSelect>(
     params: Prisma.AdminUpdateManyArgs,
     connection: Prisma.TransactionClient = database.write
   ): Promise<Array<CustomReturnType<T>>> {

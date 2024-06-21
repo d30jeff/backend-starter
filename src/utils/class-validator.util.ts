@@ -10,14 +10,19 @@ import {
 import {
   IsDefined as DefaultIsDefined,
   IsEmail as DefaultIsEmail,
+  IsIn as DefaultIsIn,
   IsNotEmpty as DefaultIsNotEmpty,
   MaxLength as DefaultMaxLength,
-  IsIn as DefaultIsIn,
   MinLength as DefaultMinLength,
 } from 'class-validator';
 
-export const IsDefined = (validationOptions?: ValidationOptions): PropertyDecorator => {
-  return DefaultIsDefined({ ...validationOptions, message: '$property is required' });
+export const IsDefined = (
+  validationOptions?: ValidationOptions
+): PropertyDecorator => {
+  return DefaultIsDefined({
+    ...validationOptions,
+    message: '$property is required',
+  });
 };
 
 export const IsIn = (
@@ -50,14 +55,27 @@ export const MinLength = (
   });
 };
 
-export const IsNotEmpty = (validationOptions?: ValidationOptions): PropertyDecorator => {
-  return DefaultIsNotEmpty({ ...validationOptions, message: '$property cannot be blank' });
+export const IsNotEmpty = (
+  validationOptions?: ValidationOptions
+): PropertyDecorator => {
+  return DefaultIsNotEmpty({
+    ...validationOptions,
+    message: '$property cannot be blank',
+  });
 };
-export const IsEmail = (validationOptions?: ValidationOptions): PropertyDecorator => {
-  return DefaultIsEmail({}, { ...validationOptions, message: '$property must be a valid email' });
+export const IsEmail = (
+  validationOptions?: ValidationOptions
+): PropertyDecorator => {
+  return DefaultIsEmail(
+    {},
+    { ...validationOptions, message: '$property must be a valid email' }
+  );
 };
 
-export async function validate<T>(cls: ClassConstructor<any>, plain: object): Promise<T> {
+export async function validate<T>(
+  cls: ClassConstructor<any>,
+  plain: object
+): Promise<T | null> {
   const object = plainToInstance(cls, plain);
 
   if (!object) {

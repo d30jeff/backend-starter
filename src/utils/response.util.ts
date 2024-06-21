@@ -9,7 +9,7 @@ import { getFormattedPath } from '@/utils/request.util.js';
 // const aliOSSService = Container.get(AliOSSService);
 const logger = SignaleLogger('Response Util');
 
-export const getExternalSignedURL = async (data: any) => {
+export const getExternalSignedURL = async (data: object | string) => {
   return new Promise<void | void[]>(async (resolve, reject) => {
     if (!data) {
       logger.info('Invalid data');
@@ -30,6 +30,7 @@ export const getExternalSignedURL = async (data: any) => {
       ) {
         logger.info(`${key} found...`);
         try {
+          // TODO: Implement Azure's equivalent to AWS' S3
           // const url = await aliOSSService.createSignedReadURL(value as string);
           if (key === 'pictureURI') {
             // data.pictureURL = url;
@@ -50,7 +51,7 @@ export const getExternalSignedURL = async (data: any) => {
           await getExternalSignedURL(value);
         } else if (value.constructor === Array) {
           await Promise.all(
-            (value as unknown[] as any).map((v) => {
+            value.map((v: string) => {
               return getExternalSignedURL(v);
             })
           );

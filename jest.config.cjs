@@ -10,8 +10,6 @@ module.exports = {
   }),
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   transform: {
-    // '^.+\\.[tj]sx?$' to process js/ts with `ts-jest`
-    // '^.+\\.m?[tj]sx?$' to process js/ts/mjs/mts with `ts-jest`
     '^.+\\.[tj]s?$': [
       'ts-jest',
       {
@@ -19,7 +17,7 @@ module.exports = {
       },
     ],
   },
-  extensionsToTreatAsEsm: ['.ts'],
   collectCoverageFrom: ['./src/**'],
   testPathIgnorePatterns: ['node_modules', 'dist'],
+  setupFilesAfterEnv: ['<rootDir>/src/utils/testing/singleton.ts'],
 };

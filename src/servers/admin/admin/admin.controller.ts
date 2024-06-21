@@ -58,7 +58,7 @@ export class AdminController {
     @Next() next: ExpressNextFunction
   ) {
     try {
-      request.sessionStore.all((error, session) => {
+      request?.sessionStore?.all((error, session) => {
         console.log(error, session);
       });
       const { page, limit } = serializePaginationParams(request);
