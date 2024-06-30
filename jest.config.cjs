@@ -18,6 +18,14 @@ module.exports = {
     ],
   },
   collectCoverageFrom: ['./src/**'],
-  testPathIgnorePatterns: ['node_modules', 'dist'],
+  testPathIgnorePatterns: [
+    'node_modules',
+    'dist',
+    '<rootDir>/src/utils/testing',
+  ],
+  coveragePathIgnorePatterns: [
+    '<rootDir>/src/(/.*)*/*.interface.ts',
+    '<rootDir>/src/types',
+  ],
   setupFilesAfterEnv: ['<rootDir>/src/utils/testing/singleton.ts'],
 };

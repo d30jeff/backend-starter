@@ -66,10 +66,11 @@ export const createApplication = async (
     })
   );
 
-  if (!config.IS_TESTING)
+  if (!config.IS_TESTING) {
     app.use(
       morgan('[:date[web]] :requestID :method :url :status - :response-time ms')
     );
+  }
 
   app.set('trust proxy', 1);
 
@@ -105,7 +106,8 @@ export const createApplication = async (
       maxAge: dayjs.duration(8, 'hour').asMilliseconds(),
       httpOnly: true,
       secure: !config.IS_DEVELOPMENT,
-      sameSite: config.IS_DEVELOPMENT ? 'lax' : 'none',
+      domain: origin[0],
+      sameSite: config.IS_DEVELOPMENT ? 'lax' : 'strict',
     } as CookieOptions,
   };
 

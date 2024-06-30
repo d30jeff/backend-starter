@@ -7,7 +7,7 @@
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint", "sort-imports-es6-autofix", "prettier"],
   "ignorePatterns": ["**/*.hbs", "**/*.html", "**/*.json", "main.*js"],
-  "extends": ["prettier"],
+  "extends": ["plugin:prettier/recommended"],
   "rules": {
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "sort-imports-es6-autofix/sort-imports-es6": [

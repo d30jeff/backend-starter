@@ -33,15 +33,9 @@ export namespace Application {
   export const Resources: {
     Dashboard: 'Dashboard';
     Permission: 'Permission';
-    Shipment: 'Shipment';
-    Address: 'Address';
-    Product: 'Product';
   } = {
     Dashboard: 'Dashboard',
     Permission: 'Permission',
-    Shipment: 'Shipment',
-    Address: 'Address',
-    Product: 'Product',
   };
 
   export type Resources = (typeof Resources)[keyof typeof Resources];

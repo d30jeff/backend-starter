@@ -71,6 +71,7 @@ export const responseInterceptor = async (
 
   if (data && data.pagination) {
     response.setHeader('X-Page', data.pagination.page);
+    response.setHeader('X-Limit', data.pagination.limit);
     response.setHeader('X-Total-Pages', data.pagination.totalPages);
     response.setHeader('X-Total-Results', data.pagination.totalResults);
   }

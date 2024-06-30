@@ -4,6 +4,7 @@ import {
   ForbiddenException,
   InternalServerErrorException,
   NotFoundException,
+  PaymentRequiredException,
   TooManyRequestsException,
   UnauthorizedException,
   UnprocessableEntityException,
@@ -19,9 +20,19 @@ describe('Http Exception Test', () => {
   });
 
   test('It Returns Expected 401 Response', () => {
-    const exception = new UnauthorizedException('Invalid Credentials');
+    const exception = new UnauthorizedException(
+      'Invalid Credentials',
+      'Invalid username or password'
+    );
     expect(exception.code).toBe('InvalidCredentials');
+    expect(exception.details).toBe('Invalid username or password');
     expect(exception.statusCode).toBe(HttpStatus.Unauthorized);
+  });
+
+  test('It Returns Expected 402 Response', () => {
+    const exception = new PaymentRequiredException('Payment Required');
+    expect(exception.code).toBe('PaymentRequired');
+    expect(exception.statusCode).toBe(HttpStatus.PaymentRequired);
   });
 
   test('It Returns Expected 403 Response', () => {

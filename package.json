@@ -7,7 +7,7 @@
     "plop": "cross-env NODE_ENV=development plop --plopfile plopfile.cjs",
     "build": "rimraf dist && tsc && tsc-alias -p tsconfig.json",
     "pack:staging": "docker compose -f docker-compose.staging.yml build",
-    "test": "cross-env  jest --detectOpenHandles --logHeapUsage",
+    "test": "cross-env jest --detectOpenHandles --logHeapUsage",
     "test:coverage": "yarn run test --coverage",
     "start": "node main.cjs",
     "prepare": "husky"
@@ -69,6 +69,7 @@
     "@babel/core": "^7.0.0-0",
     "@babel/preset-env": "^7.15.0",
     "@babel/preset-typescript": "^7.15.0",
+    "@jest-mock/express": "^2.1.0",
     "@types/ali-oss": "^6.16.11",
     "@types/bcryptjs": "^2.4.2",
     "@types/compression": "^1.7.0",
@@ -112,7 +113,6 @@
     "tsc-alias": "^1.8.10",
     "tsc-watch": "^6.2.0",
     "tsconfig-paths": "^4.2.0",
-    "tsload": "^1.0.0",
     "typescript": "^5.4.5"
   },
   "optionalDependencies": {
