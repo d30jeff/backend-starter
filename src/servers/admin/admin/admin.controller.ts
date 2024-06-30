@@ -1,6 +1,6 @@
 import { Admin } from '@/servers/admin/admin/admin.interface.js';
 import { AdminService } from '@/servers/admin/admin/admin.service.js';
-import { Container } from 'typedi';
+import { Container, Service } from 'typedi';
 import {
   Controller,
   Delete,

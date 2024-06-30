@@ -8,7 +8,7 @@ import { getExternalSignedURL } from '@/utils/response.util.js';
 const logger = SignaleLogger('Prisma');
 const log: (Prisma.LogLevel | Prisma.LogDefinition)[] = [
   {
-    emit: 'event',
+    emit: 'stdout',
     level: 'query',
   },
   {
@@ -17,18 +17,15 @@ const log: (Prisma.LogLevel | Prisma.LogDefinition)[] = [
   },
   {
     emit: 'stdout',
+    level: 'info',
+  },
+  {
+    emit: 'stdout',
     level: 'warn',
   },
 ];
 
-if (config.IS_TESTING === false) {
-  log.push({
-    emit: 'stdout',
-    level: 'info',
-  });
-}
-
-const prismaWriteConnection: PrismaClient<Prisma.PrismaClientOptions, 'query'> =
+let prismaWriteConnection: PrismaClient<Prisma.PrismaClientOptions, 'query'> =
   new PrismaClient({
     log,
     datasources: {
@@ -78,7 +75,7 @@ const middleware = async (params: Prisma.MiddlewareParams, next) => {
     }
 
     for (const d of data) {
-      if (params.model) {
+      if (params.model && !d.ID) {
         d.ID = generateID(StringUtil.SnakeCase(params.model));
       }
     }

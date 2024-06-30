@@ -5,7 +5,6 @@ dotenv.config();
 
 export const config = {
   NODE_ENV: process.env.NODE_ENV,
-  SCHOOL_PORT: Number(process.env.SCHOOL_PORT),
   IS_DEVELOPMENT: environment.toLowerCase() === 'development',
   IS_TESTING: environment.toLowerCase() === 'testing',
   IS_STAGING: environment.toLowerCase() === 'staging',

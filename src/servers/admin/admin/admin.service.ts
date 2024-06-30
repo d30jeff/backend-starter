@@ -5,21 +5,19 @@ import {
   AdminRepository,
 } from '@/repositories/admin.repository.js';
 import { Bcrypt } from '@/utils/bcrypt.util.js';
+import { Container, Service } from 'typedi';
+import { CountryRepository } from '@/repositories/country.repository.js';
 import { CustomLogger, Logger } from '@/providers/logger.provider.js';
 import { EmailService } from '@/services/email/email.service.js';
 import { FirebaseService } from '@/services/firebase/firebase.service.js';
-import { Service } from 'typedi';
 
 @Service()
 export class AdminService implements Admin.Interface {
   @Logger()
   private readonly logger: CustomLogger;
+  private readonly countryRepository = Container.get(CountryRepository);
 
-  constructor(
-    private readonly adminRepository: AdminRepository,
-    private readonly firebaseService: FirebaseService,
-    private readonly emailService: EmailService
-  ) {}
+  constructor(private readonly adminRepository: AdminRepository) {}
 
   async initialize() {}
 

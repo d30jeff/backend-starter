@@ -10,7 +10,11 @@ export class Pagination {
   limit: number;
   totalPages!: number;
   totalResults!: number;
-  constructor({ page, limit, total }: Record<'page' | 'limit' | 'total', number>) {
+  constructor({
+    page,
+    limit,
+    total,
+  }: Record<'page' | 'limit' | 'total', number>) {
     this.page = page;
     this.limit = limit;
     this.totalPages = Math.ceil(total / limit);

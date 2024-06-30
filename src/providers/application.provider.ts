@@ -33,7 +33,9 @@ export const createApplication = async (
 ): Promise<Application.Instance> => {
   const { name, controllers, origin, staticPaths, logRequests } = params;
 
-  if (!name) throw Error('Application name is required');
+  if (!name) {
+    throw Error('Application name is required');
+  }
 
   const logger = SignaleLogger(name);
   const app = express();
@@ -124,7 +126,7 @@ export const createApplication = async (
     })
   );
 
-  if (!config.IS_PRODUCTION && staticPaths && staticPaths.length)
+  if (!config.IS_PRODUCTION && staticPaths?.length)
     for (const { prefix, path } of staticPaths) {
       app.use(prefix, express.static(path));
     }
