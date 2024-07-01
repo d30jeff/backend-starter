@@ -54,6 +54,8 @@ Please check main.js
 - [Stripe-like ID](#stripe-like-ID)
 - [Jest](#jest)
 - [Supertest](#supertest)
+- [Standardized response](#standardized-response)
+- [Request ID](#request-id)
 - [HTTP request logger with Morgan](#http-request-logger-with-morgan)
 - [Logging with Signale](#logging-with-signale)
 - [Repository pattern](#repository-pattern)
@@ -417,11 +419,11 @@ For more information please visit their [official website](https://www.prisma.io
 
 <h2 id="stripe-like-ID">Stripe-like ID</h2>
 
-If you worked with Stripe before, you'd notice that their object IDs are structure in a way where the prefix provides hint to the object.
+If you worked with Stripe before, you'd notice that their object IDs are structured in a way that the prefix provides hint to the object.
 
 e.g. **Payment Intent** - `pi_uiwoei182`
 
-It provides a great developer experience, due to:
+This provides a good developer experience for the following reasons:
 
 1. Better readability over UUID
 2. Non predicatable sequence over incremental ID
@@ -439,9 +441,18 @@ for (const d of data) {
 ```
 
 <h2 id="jest">Jest</h2>
-TODO
+
+![Jest](https://i.ibb.co/DKtgYK8/Screenshot-2024-07-01-at-15-02-26.png)
 
 <h2 id="supertest">Supertest</h2>
+
+TODO
+
+<h2 id="standardized-response">Standardized response</h2>
+
+TODO
+
+<h2 id="standardized-response">Request ID</h2>
 
 TODO
 
