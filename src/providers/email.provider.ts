@@ -1,1 +1,1 @@
-// TODO: Implement Mailgun
+// TODO: Implement email

@@ -37,7 +37,7 @@ security:
   - cookieAuth: []
 
 paths:
-  /account/check:
-    $ref: "../account/account.doc.yml#/components/Check"
-  /account/signup:
-    $ref: "../account/account.doc.yml#/components/Signup"
+  /cats:
+    $ref: "../cat/cat.doc.yml#/components/Cat"
+  /cats/{ID}:
+    $ref: "../cat/cat.doc.yml#/components/CatDetails"

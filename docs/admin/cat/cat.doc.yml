@@ -1,0 +1,53 @@
+components:
+  Cat:
+    post:
+      summary: Create Cat
+      description: Create a cat based on given payload
+      tags:
+        - "Cat"
+      operationId: "post/cats"
+      requestBody:
+        description: Payload for a Cat record
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "./cat.payload.yml#/components/schemas/Cat"
+      responses:
+        "201":
+          $ref: "./cat.response.yml#/components/responses/Single"
+        "400":
+          $ref: "../../error.schema.yml#/components/responses/ValidationError"
+        "500":
+          $ref: "../../error.schema.yml#/components/responses/InternalServerError"
+    get:
+      summary: List Cats
+      description: Returns a list of paginated Cats
+      tags:
+        - "Cat"
+      operationId: "get/cats"
+      responses:
+        "200":
+          $ref: "./cat.response.yml#/components/responses/Paginated"
+        "500":
+          $ref: "../../error.schema.yml#/components/responses/InternalServerError"
+
+  CatDetails:
+    get:
+      summary: Get Cat by ID
+      description: Returns a Cat details based on given ID params
+      tags:
+        - "Cat"
+      operationId: "get/cats/id"
+      parameters:
+        - in: path
+          name: ID
+          required: true
+          schema:
+            type: string
+          description: Cat ID
+      responses:
+        "200":
+          $ref: "./cat.response.yml#/components/responses/Single"
+        "500":
+          $ref: "../../error.schema.yml#/components/responses/InternalServerError"

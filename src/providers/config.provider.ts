@@ -9,13 +9,11 @@ export const config = {
   IS_TESTING: environment.toLowerCase() === 'testing',
   IS_STAGING: environment.toLowerCase() === 'staging',
   IS_PRODUCTION: environment.toLowerCase() === 'production',
-  BATCH_COUNT: 100,
-
   ADMIN_PORT: Number(process.env.ADMIN_PORT),
   ADMIN_FRONTEND_HOSTNAME: process.env.ADMIN_FRONTEND_HOSTNAME,
 
   SENDER_EMAIL: process.env.SENDER_EMAIL,
-  // ADMIN_EMAIL: process.env.ADMIN_EMAIL,
+
   DATABASE_URL: process.env.DATABASE_URL,
   DATABASE_READ_REPLICA_URL: process.env.DATABASE_READ_REPLICA_URL,
 

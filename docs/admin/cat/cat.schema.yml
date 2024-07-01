@@ -1,11 +1,9 @@
 components:
   schemas:
-    Account:
+    Cat:
       type: object
       properties:
         ID:
-          type: string
-        code:
           type: string
         name:
           type: string
