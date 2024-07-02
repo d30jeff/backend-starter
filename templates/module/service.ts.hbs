@@ -7,9 +7,9 @@ import {
   {{pascalCase name}}WithPublicFields
 } from '@/repositories/{{kebabCase name}}.repository.js';
 import { Pagination } from '@/utils/pagination.util.js';
-import { Service } from 'typedi';
+import { Injectable } from '@decorators/di';
 
-@Service()
+@Injectable()
 export class {{pascalCase name}}Service {
   @Logger()
   private readonly logger: CustomLogger;

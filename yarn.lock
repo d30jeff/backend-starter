@@ -1649,17 +1649,17 @@
   dependencies:
     "@jridgewell/trace-mapping" "0.3.9"
 
-"@decorators/di@^3.1.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@decorators/di/-/di-3.1.0.tgz#5ab23b41c124c33c72d6f09593ef1b8a7daf3dfe"
-  integrity sha512-nKVSpkLqfoWcZiSk7+Jmt+1jMvGdXhwYVshZ5a7z04ZBUTafMokQFJ9zxQqdmFATbtp95ZAK0cIVfJyil/s0Dw==
+"@decorators/di@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@decorators/di/-/di-2.0.0.tgz#13e043e21f5e4e0d1b664baef75883b0946ddf9f"
+  integrity sha512-Rexzo3vkV3v9Fb0HI8LwsM3cie73ftVw8fRzZFXNrc7ZhT0nfwbRfnp3HcSdgeOVdKBhsSsv/uF11Ti+qPNa+g==
   dependencies:
-    reflect-metadata "^0.1.13"
+    reflect-metadata "0.1.13"
 
-"@decorators/express@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@decorators/express/-/express-3.0.0.tgz#dd7dc7f70da4fc15070ce5ec92d79040c04964ae"
-  integrity sha512-YmQWcke/v7/memmuiSYtYYhP6lpMjiUORIn7bBWL6REsWpJnRl76PXS6D/DUPdLj9NrtBQSGJkKWfbtoSibicQ==
+"@decorators/express@^2.9.3":
+  version "2.9.4"
+  resolved "https://registry.yarnpkg.com/@decorators/express/-/express-2.9.4.tgz#104c7564b4ed2604eccc660cab3e7f06a1a3f67e"
+  integrity sha512-H/WHHsBVvPrXn6MSvDueqEydgH/BzD5mKgEcdG1DUv6K/Unw7aDEBBJ4tgAPpPQihMkafXliMurEPmd8hIxmng==
 
 "@eslint-community/eslint-utils@^4.2.0", "@eslint-community/eslint-utils@^4.4.0":
   version "4.4.0"
@@ -9048,10 +9048,10 @@ redis-parser@^3.0.0:
   dependencies:
     redis-errors "^1.0.0"
 
-reflect-metadata@^0.1.13:
-  version "0.1.14"
-  resolved "https://registry.yarnpkg.com/reflect-metadata/-/reflect-metadata-0.1.14.tgz#24cf721fe60677146bb77eeb0e1f9dece3d65859"
-  integrity sha512-ZhYeb6nRaXCfhnndflDK8qI6ZQ/YcWZCISRAWICW9XYqMUwjZM9Z0DveWX/ABN01oxSHwVxKQmxeYZSsm0jh5A==
+reflect-metadata@0.1.13:
+  version "0.1.13"
+  resolved "https://registry.yarnpkg.com/reflect-metadata/-/reflect-metadata-0.1.13.tgz#67ae3ca57c972a2aa1642b10fe363fe32d49dc08"
+  integrity sha512-Ts1Y/anZELhSsjMcU605fU9RE4Oi3p5ORujwbIKXfWa+0Zxs510Qrmrce5/Jowq3cHSZSJqBjypxmHarc+vEWg==
 
 reflect-metadata@^0.2.2:
   version "0.2.2"
@@ -10217,15 +10217,10 @@ typed-array-length@^1.0.6:
     is-typed-array "^1.1.13"
     possible-typed-array-names "^1.0.0"
 
-typedi@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/typedi/-/typedi-0.10.0.tgz#e8f9a5ee100b84addbdfb57fe90d8d9ed2a21dea"
-  integrity sha512-v3UJF8xm68BBj6AF4oQML3ikrfK2c9EmZUyLOfShpJuItAqVBHWP/KtpGinkSsIiP6EZyyb6Z3NXyW9dgS9X1w==
-
 typescript@^5.4.5:
-  version "5.4.5"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.4.5.tgz#42ccef2c571fdbd0f6718b1d1f5e6e5ef006f611"
-  integrity sha512-vcI4UpRgg81oIRUFwR0WSIHKt11nJ7SAVlYNIu+QpqeyXP+gpQJy/Z4+F0aGxSE4MqwjyXvW/TzgkLAx2AGHwQ==
+  version "5.5.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.5.3.tgz#e1b0a3c394190838a0b168e771b0ad56a0af0faa"
+  integrity sha512-/hreyEujaB0w76zKo6717l3L0o/qEUtRgdvUBvlkhoWeOVMjMuHNHk0BRBzikzuGDqNmPQbg5ifMEqsHLiIUcQ==
 
 uglify-js@^3.1.4:
   version "3.18.0"

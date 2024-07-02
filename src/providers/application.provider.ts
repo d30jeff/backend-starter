@@ -120,7 +120,6 @@ export const createApplication = async (
   );
 
   const router = Router();
-
   attachControllers(router, controllers);
   app.use(
     bodyParser.json({
@@ -128,13 +127,13 @@ export const createApplication = async (
     })
   );
 
-  if (!config.IS_PRODUCTION && staticPaths?.length)
+  if (!config.IS_PRODUCTION && staticPaths?.length) {
     for (const { prefix, path } of staticPaths) {
       app.use(prefix, express.static(path));
     }
+  }
 
   app.use('/v1', router);
-
   app.use((request: ExpressRequest, response, next) => {
     const timestamp = dayjs().utc().format();
 
@@ -155,16 +154,14 @@ export const createApplication = async (
     next();
   });
 
-  const container = new Container();
-
-  container.provide([
+  Container.provide([
     {
       provide: ERROR_MIDDLEWARE,
       useClass: GlobalErrorMiddleware,
     },
   ]);
 
-  app.use((request: ExpressRequest, response, next) => {
+  app.use((request: ExpressRequest, response) => {
     return response.status(HttpStatus.NotFound).json({
       error: {
         code: 'RouteNotFound',

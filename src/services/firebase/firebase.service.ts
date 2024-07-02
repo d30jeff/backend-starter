@@ -1,9 +1,9 @@
 import { CustomLogger, Logger } from '@/providers/logger.provider.js';
 import { Firebase } from '@/services/firebase/firebase.interface.js';
-import { Service } from 'typedi';
+import { Injectable } from '@decorators/di';
 import firebase from 'firebase-admin';
 
-@Service()
+@Injectable()
 export class FirebaseService {
   @Logger()
   private readonly logger: CustomLogger;

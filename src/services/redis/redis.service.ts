@@ -1,8 +1,8 @@
+import { Injectable } from '@decorators/di';
 import { Redis } from '@/services/redis/redis.interface.js';
-import { Service } from 'typedi';
 import { redis } from '@/providers/redis.provider.js';
 
-@Service()
+@Injectable()
 export class RedisService {
   set(params: Redis.CreateParams) {
     const { type, ID, value, ttl = 60 } = params;

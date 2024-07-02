@@ -1,4 +1,4 @@
-import { AdminController } from '@/servers/admin/admin/admin.controller.js';
+import { CatController } from '@/servers/admin/cat/cat.controller.js';
 import { HealthcheckController } from '@/servers/admin/healthcheck/healthcheck.controller.js';
 
-export const controllers = [AdminController, HealthcheckController];
+export const controllers = [HealthcheckController, CatController];

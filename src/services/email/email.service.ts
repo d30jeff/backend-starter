@@ -1,9 +1,9 @@
 import { CustomLogger, Logger } from '@/providers/logger.provider.js';
-import { Service } from 'typedi';
+import { Injectable } from '@decorators/di';
 import { config } from '@/providers/config.provider.js';
 import nodemailer from 'nodemailer';
 
-@Service()
+@Injectable()
 export class EmailService {
   @Logger()
   private readonly logger: CustomLogger;

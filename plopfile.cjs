@@ -52,15 +52,6 @@ module.exports = function (
           return answers.type === 'module';
         },
       },
-      {
-        type: 'confirm',
-        name: 'repository',
-        message: 'Do you want to create a Repository?',
-        default: false,
-        when(answers) {
-          return answers.type === 'module';
-        },
-      },
     ],
     actions: (data) => {
       const items = [];
@@ -157,6 +148,6 @@ const createModule = (data, items) => {
       type: 'add',
       path: 'src/servers/{{kebabCase server}}/{{kebabCase name}}/{{kebabCase name}}.service.ts',
       templateFile: 'templates/module/service.ts.hbs',
-    },
+    }
   );
 };

@@ -381,9 +381,7 @@ function validateEnvironmentVariables() {
 
 <h2 id="dependency-injection">Dependency injection</h2>
 
-Uses [typedi](https://github.com/typestack/typedi) to decorate injectable classes.
-
-> In some cases, for example in controllers, where the @Controller decorator is already being used, you may encounter unexpected behavior, and you may need to explicitly inject your dependency like so: `private readonly catService = Container.get(CatService)`
+Uses [@decorators/di](https://www.npmjs.com/package/@decorators/di) to decorate injectable classes.
 
 <h2 id="api-documentation">API Documentation</h2>
 
@@ -450,11 +448,137 @@ TODO
 
 <h2 id="standardized-response">Standardized response</h2>
 
-TODO
+### Metadata
 
-<h2 id="standardized-response">Request ID</h2>
+All responses will contain the "metadata" property
 
-TODO
+```
+type Metadata = {
+  statusCode: number;
+  resource: string;
+  timestamp: string;
+  requestID: string;
+}
+```
+
+**statusCode** (Number) - The HTTP status code.
+
+**resource** (String) - The current resource name.
+
+**timestamp** (String) - The current date and time in UTC+00:00 expressed in ISO 8601.
+
+**requestID** (UUIDv4) - The ID of the current request
+
+For example
+
+**GET /v1/cats**
+
+```
+{
+  data: {
+    name: string;
+  },
+  metadata: {
+    statusCode: 200,
+    resource: '/v1/cats',
+    timestamp: '2024-07-01T20:05:50',
+    requestID: 'a985facb-7f33-471b-8925-84bed103b254'
+  }
+}
+```
+
+By default all response are enveloped in 'data' property.
+
+The major difference is unlike Shopify's or Google's envelope,
+where the envelop is named respective to the endpoints
+
+e.g.
+
+Shopify
+
+https://shopify.dev/docs/api/admin-rest/2024-04/resources/location
+
+```
+HTTP/1.1 200 OK
+{
+  "locations": [
+    {...}
+  ]
+```
+
+the `data` property is consistent across all resources, even for endpoints that return a paginated list.
+
+Which brings us to the response shape of paginated resources.
+
+```
+{
+  "data": {
+    items: Cat[];
+    pagination: {
+      page: number;
+      limit: number;
+      totalPages: number;
+      totalResults: number;
+    };
+  },
+  "metadata": Metadata;
+}
+```
+
+### Error response
+
+Error responses are enveloped with the `error` property that sits on the same level as `metadata`
+
+For all non 400 errors, there'll be code and message.
+
+**code** by default would use the `message` casted into PascalCase.
+
+`this.code = StringUtil.PascalCase(message);`
+
+```
+type Error = {
+  code: string;
+  message: string;
+}
+
+{
+  error: Error;
+  metadata: Metadata;
+}
+```
+
+**400** errors will contain validation information.
+
+For example in this 400 error for `GET /v1/cats`
+
+```
+{
+  "error": {
+    "code": "ValidationError",
+    "errors": [
+      {
+        "name": {
+          "isDefined": "name is required",
+          "maxLength": "name cannot be more than 10 characters"
+        }
+      }
+    ],
+    "message": "Validation Error"
+  },
+  "metadata": {
+    "requestID": "cac393ad-6240-4880-a9c3-e8a63bbd2791",
+    "resource": "/v1/cats",
+    "statusCode": 400,
+    "timestamp": "2024-07-02T05:44:01Z"
+  }
+}
+```
+
+<h2 id="request-id">Request ID</h2>
+
+By default all requests are tagged with an ID based on UUIDv4.
+
+_Note: By default it would also set the response header `X-Request-ID` property with the corresponding request ID value._
 
 <h2 id="http-request-logger-with-morgan">HTTP Request logger with Morgan</h2>
 
@@ -462,11 +586,67 @@ TODO
 
 <h2 id="logging-with-signale">Logging with Signale</h2>
 
-TODO
+Signale logger can be initialized in two ways:
+
+1. By importing the `SignaleLogger` from `src/providers/logger.provider.ts`
+
+And initializing your logger like so
+
+`const logger = SignaleLogger('<Context>')`
+
+2. Used in a class(controller or service) as a decorated private property.
+
+```
+export class MyClass {
+  @Logger()
+  private readonly logger: CustomLogger;
+
+  async doSomething() {
+    this.logger.info('Doing something');
+  }
+}
+```
+
+When used in a class, the default context will be the class's name. e.g. `MyClass`
+
+_Note: By default the logger is suppressed when NODE_ENV='testing' to reduce noise during testing_
+
+For more information, please check out `src/providers/logger.provider.ts`
 
 <h2 id="repository-pattern">Repository pattern</h2>
 
-TODO
+Repositories are located in `src/repositories`
+
+Since the ID is generated in the Prisma middleware, the **Create** and **Create Many** methods are typed to treat `ID` property as optional
+
+```
+createMany<T extends Prisma.AdminSelect>(
+  params: Omit<Prisma.AdminCreateManyArgs, 'data'> & {
+    data?: Array<Omit<Prisma.AdminCreateManyInput, 'ID'> & { ID?: string }>;
+  },
+  connection: Prisma.TransactionClient = database.write
+): Promise<Array<CustomReturnType<T>>> {
+  return connection.admin.createMany(
+    params as Prisma.AdminCreateManyArgs
+  ) as unknown as Promise<Array<CustomReturnType<T>>>;
+}
+```
+
+The second `connection` parameter defaults to the current database connection.
+
+i.e. Create / update methods are using the write connection, while find, and findMany are using the read connection.
+
+The purpose for this is so that you're free to pass in the client during a transaction.
+
+Example
+
+```
+await database.write.$transaction(async (tx) => {
+  await this.accountRepository.create({}, tx);
+
+  await this.profileRepository.create({}, tx)
+})
+```
 
 <h2 id="rate-limit">Rate Limit</h2>
 

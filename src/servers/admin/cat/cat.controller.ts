@@ -1,6 +1,5 @@
-import { Admin } from '@/servers/admin/admin/admin.interface.js';
-import { AdminService } from '@/servers/admin/admin/admin.service.js';
-import { Container, Service } from 'typedi';
+import { Cat } from '@/servers/admin/cat/cat.interface.js';
+import { CatService } from '@/servers/admin/cat/cat.service.js';
 import {
   Controller,
   Delete,
@@ -12,7 +11,6 @@ import {
   Request,
   Response,
 } from '@decorators/express';
-import { ControllerSlowDown } from '@/middlewares/controller-slow-down.middleware.js';
 import { CustomLogger, Logger } from '@/providers/logger.provider.js';
 import {
   ExpressNextFunction,
@@ -20,31 +18,28 @@ import {
   ExpressResponse,
 } from '@/interfaces/express.interface.js';
 import { HttpStatus } from '@/enums/http-status.enum.js';
+import { Injectable } from '@decorators/di';
 import { serializePaginationParams } from '@/utils/pagination.util.js';
 import { validate } from '@/utils/class-validator.util.js';
 
-@Controller('/admin')
-export class AdminController {
+@Injectable()
+@Controller('/cats')
+export class CatController {
   @Logger()
   private readonly logger: CustomLogger;
-  private readonly adminService = Container.get(AdminService);
 
-  constructor() {}
+  constructor(private readonly catService: CatService) {}
 
-  @Post('/sign-in', [ControllerSlowDown()])
+  @Post('/')
   async create(
     @Request() request: ExpressRequest,
     @Response() response: ExpressResponse,
     @Next() next: ExpressNextFunction
   ) {
     try {
-      const body = await validate<Admin.SignIn.Dto>(
-        Admin.SignIn.Dto,
-        request.body
-      );
-      const data = await this.adminService.signIn(body);
-
-      return response.status(HttpStatus.Created).json(body);
+      const body = await validate<Cat.Create.Dto>(Cat.Create.Dto, request.body);
+      const data = await this.catService.create(body);
+      return response.status(HttpStatus.Created).json(new Cat.Response(data));
     } catch (error) {
       this.logger.fatal(error);
       next(error);
@@ -58,11 +53,19 @@ export class AdminController {
     @Next() next: ExpressNextFunction
   ) {
     try {
-      request?.sessionStore?.all((error, session) => {
-        console.log(error, session);
-      });
       const { page, limit } = serializePaginationParams(request);
-      return response.status(HttpStatus.Ok).json({});
+
+      const { items, pagination } = await this.catService.list({
+        page,
+        limit,
+      });
+
+      return response.status(HttpStatus.Ok).json({
+        items: items.map((item) => {
+          return new Cat.Response(item);
+        }),
+        pagination,
+      });
     } catch (error) {
       this.logger.fatal(error);
       next(error);
@@ -77,7 +80,11 @@ export class AdminController {
     @Next() next: ExpressNextFunction
   ) {
     try {
-      return response.status(HttpStatus.Ok).json({});
+      const data = await this.catService.findOne({
+        ID,
+      });
+
+      return response.status(HttpStatus.Ok).json(new Cat.Response(data));
     } catch (error) {
       this.logger.fatal(error);
       next(error);
@@ -92,7 +99,14 @@ export class AdminController {
     @Next() next: ExpressNextFunction
   ) {
     try {
-      return response.status(HttpStatus.Ok).json({});
+      const body = await validate<Cat.Update.Dto>(Cat.Update.Dto, request.body);
+
+      const data = await this.catService.update({
+        ...body,
+        ID,
+      });
+
+      return response.status(HttpStatus.Ok).json(new Cat.Response(data));
     } catch (error) {
       this.logger.fatal(error);
       next(error);
@@ -107,6 +121,10 @@ export class AdminController {
     @Next() next: ExpressNextFunction
   ) {
     try {
+      await this.catService.delete({
+        ID,
+      });
+
       return response.sendStatus(HttpStatus.NoContent);
     } catch (error) {
       this.logger.fatal(error);

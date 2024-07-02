@@ -1,6 +1,5 @@
 import { {{pascalCase name}} } from '@/servers/{{kebabCase server}}/{{kebabCase name}}/{{kebabCase name}}.interface.js';
 import { {{pascalCase name}}Service } from '@/servers/{{kebabCase server}}/{{kebabCase name}}/{{kebabCase name}}.service.js';
-import { Container } from 'typedi';
 import {
   Controller,
   Delete,
@@ -27,7 +26,7 @@ export class {{pascalCase name}}Controller {
   @Logger()
   private readonly logger: CustomLogger;
 
-  private readonly {{camelCase name}}Service = Container.get({{pascalCase name}}Service);
+  constructor(private readonly {{camelCase name}}Service: {{pascalCase name}}Service) {}
 
   @Post('/')
   async create(

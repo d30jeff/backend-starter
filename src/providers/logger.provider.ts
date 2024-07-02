@@ -15,7 +15,7 @@ export const SignaleLogger = (name: string): Signale.Signale => {
 export type CustomLogger = Signale.Signale;
 
 export const Logger = () => {
-  return (target, key: string | symbol) => {
+  return (target: Object, key: string) => {
     const getter = () => {
       return SignaleLogger(target.constructor.name);
     };

@@ -1,13 +1,14 @@
 import { BaseException } from '@/exceptions/base.exception.js';
 import { ErrorMiddleware } from '@decorators/express';
-import { ErrorRequestHandler, Request, Response } from 'express';
+import { ErrorRequestHandler, NextFunction, Request, Response } from 'express';
 import { HttpStatus } from '@/enums/http-status.enum.js';
+import { Injectable } from '@decorators/di';
 import { SignaleLogger } from '@/providers/logger.provider.js';
 import { ValidationError } from 'class-validator';
 import { dayjs } from '@/utils/dayjs.util.js';
 import { getFormattedPath } from '@/utils/request.util.js';
 
-const logger = SignaleLogger('Global Error Handler');
+const logger = SignaleLogger('Error Middleware');
 
 const extractPropertiesAndConstraint = (
   validationErrors: ValidationError[],
@@ -30,6 +31,7 @@ const extractPropertiesAndConstraint = (
   }
 };
 
+@Injectable()
 export class GlobalErrorMiddleware implements ErrorMiddleware {
   public use(e: Error, request: Request, response: Response) {
     const timestamp = dayjs().utc().format();
@@ -37,7 +39,6 @@ export class GlobalErrorMiddleware implements ErrorMiddleware {
       statusCode: number;
       details: string;
     };
-    logger.fatal(error);
 
     if (error.length && error.constructor === Array) {
       const errors = [];
@@ -59,9 +60,7 @@ export class GlobalErrorMiddleware implements ErrorMiddleware {
           requestID: request.id,
         },
       });
-    }
-
-    if (error instanceof BaseException) {
+    } else if (error instanceof BaseException) {
       return response.status(error.statusCode).json({
         error: {
           code: error.code,
@@ -80,11 +79,11 @@ export class GlobalErrorMiddleware implements ErrorMiddleware {
 
     return response.status(HttpStatus.InternalServerError).json({
       error: {
-        code: 'INTERNAL_SERVER_ERROR',
-        message: 'Something went wrong',
+        code: 'InternalServerError',
+        message: 'Internal Server Error',
       },
       metadata: {
-        statusCode: error.statusCode,
+        statusCode: HttpStatus.InternalServerError,
         resource: getFormattedPath(request),
         timestamp,
         requestID: request.id,
