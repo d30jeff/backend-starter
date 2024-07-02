@@ -1,6 +1,6 @@
 import { BaseException } from '@/exceptions/base.exception.js';
 import { ErrorMiddleware } from '@decorators/express';
-import { ErrorRequestHandler, NextFunction, Request, Response } from 'express';
+import { ErrorRequestHandler, Request, Response } from 'express';
 import { HttpStatus } from '@/enums/http-status.enum.js';
 import { Injectable } from '@decorators/di';
 import { SignaleLogger } from '@/providers/logger.provider.js';

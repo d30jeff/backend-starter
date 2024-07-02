@@ -1,5 +1,3 @@
-import { CatService } from '@/servers/admin/cat/cat.service.js';
-import { Container } from '@decorators/di';
 import { config } from '@/providers/config.provider.js';
 import { controllers } from '@/servers/admin/admin.controllers.js';
 import { createApplication } from '@/providers/application.provider.js';
