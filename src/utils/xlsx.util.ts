@@ -1,5 +1,5 @@
 import { Stream } from 'node:stream';
-import XLSX from 'xlsx';
+import XLSX from 'node-xlsx';
 
 export const streamToBuffer = (stream: Stream) => {
   return new Promise((resolve, reject) => {

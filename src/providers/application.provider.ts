@@ -66,7 +66,7 @@ export const createApplication = async (
     })
   );
 
-  if (!config.IS_TESTING) {
+  if (!config.isTest) {
     app.use(
       morgan('[:date[web]] :requestID :method :url :status - :response-time ms')
     );
@@ -74,7 +74,7 @@ export const createApplication = async (
 
   app.set('trust proxy', 1);
 
-  if (!config.IS_DEVELOPMENT) {
+  if (!config.isDevelopment) {
     app.use(
       globalRateLimit({
         limit: 100,
@@ -105,9 +105,9 @@ export const createApplication = async (
     cookie: {
       maxAge: dayjs.duration(8, 'hour').asMilliseconds(),
       httpOnly: true,
-      secure: !config.IS_DEVELOPMENT,
+      secure: !config.isDevelopment,
       domain: origin[0],
-      sameSite: config.IS_DEVELOPMENT ? 'lax' : 'strict',
+      sameSite: config.isDevelopment ? 'lax' : 'strict',
     } as CookieOptions,
   };
 
@@ -127,7 +127,7 @@ export const createApplication = async (
     })
   );
 
-  if (!config.IS_PRODUCTION && staticPaths?.length) {
+  if (!config.isProduction && staticPaths?.length) {
     for (const { prefix, path } of staticPaths) {
       app.use(prefix, express.static(path));
     }

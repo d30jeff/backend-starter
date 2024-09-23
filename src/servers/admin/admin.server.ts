@@ -11,7 +11,7 @@ async function main() {
       {
         prefix: '/',
         path: 'docs/admin',
-        enabled: config.IS_PRODUCTION === false,
+        enabled: config.isProduction === false,
       },
     ],
   });

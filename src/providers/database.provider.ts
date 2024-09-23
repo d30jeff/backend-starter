@@ -55,7 +55,7 @@ const displayLog = (event: Prisma.QueryEvent) => {
   });
 };
 
-if (config.IS_DEVELOPMENT) {
+if (config.isDevelopment) {
   prismaWriteConnection.$on('query', displayLog);
   prismaReadConnection.$on('query', displayLog);
 }

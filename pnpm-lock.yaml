@@ -24,7 +24,7 @@ importers:
         specifier: ^2.9.3
         version: 2.9.4(@decorators/di@2.0.0)(express@4.21.0)
       '@prisma/client':
-        specifier: ^5.14.0
+        specifier: ^5.19.1
         version: 5.19.1(prisma@5.19.1)
       ali-oss:
         specifier: ^6.20.0
@@ -71,6 +71,9 @@ importers:
       dotenv:
         specifier: ^16.4.5
         version: 16.4.5
+      envalid:
+        specifier: ^8.0.0
+        version: 8.0.0
       express:
         specifier: ^4.17.1
         version: 4.21.0
@@ -135,7 +138,7 @@ importers:
         specifier: ^8.7.1
         version: 8.12.0
       prisma:
-        specifier: ^5.14.0
+        specifier: ^5.19.1
         version: 5.19.1
       prisma-dbml-generator:
         specifier: ^0.12.0
@@ -311,7 +314,7 @@ importers:
         specifier: ^4.2.0
         version: 4.2.0
       typescript:
-        specifier: ^5.4.5
+        specifier: ^5.6.2
         version: 5.6.2
 
 packages:
@@ -2747,6 +2750,10 @@ packages:
   env-paths@2.2.1:
     resolution: {integrity: sha512-+h1lkLKhZMTYjog1VEpJNG7NZJWcuc2DDk/qsqSTRRCOXiLjeQ1d1/udrUGhqMxUgAlwKNZ0cf2uqan5GLuS2A==}
     engines: {node: '>=6'}
+
+  envalid@8.0.0:
+    resolution: {integrity: sha512-PGeYJnJB5naN0ME6SH8nFcDj9HVbLpYIfg1p5lAyM9T4cH2lwtu2fLbozC/bq+HUUOIFxhX/LP0/GmlqPHT4tQ==}
+    engines: {node: '>=8.12'}
 
   environment@1.1.0:
     resolution: {integrity: sha512-xUtoPkMggbz0MPyPiIWr1Kp4aeWJjDZ6SMvURhimjdZgsRuDplF5/s9hcgGhyXMhs+6vpnuoiZ2kFiu3FMnS8Q==}
@@ -5466,6 +5473,9 @@ packages:
   tsconfig-paths@4.2.0:
     resolution: {integrity: sha512-NoZ4roiN7LnbKn9QqE1amc9DJfzvZXxF4xDavcOWt1BPkdx+m+0gJuPM+S0vCe7zTJMYUP0R8pO2XMr+Y8oLIg==}
     engines: {node: '>=6'}
+
+  tslib@2.6.2:
+    resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
 
   tslib@2.7.0:
     resolution: {integrity: sha512-gLXCKdN1/j47AiHiOkJN69hJmcbGTHI0ImLmbYLHykhgeN0jVGola9yVjFgzCUklsZQMW55o+dW7IXv3RCXDzA==}
@@ -9327,6 +9337,10 @@ snapshots:
 
   env-paths@2.2.1: {}
 
+  envalid@8.0.0:
+    dependencies:
+      tslib: 2.6.2
+
   environment@1.1.0:
     optional: true
 
@@ -12545,6 +12559,8 @@ snapshots:
       json5: 2.2.3
       minimist: 1.2.8
       strip-bom: 3.0.0
+
+  tslib@2.6.2: {}
 
   tslib@2.7.0: {}
 
