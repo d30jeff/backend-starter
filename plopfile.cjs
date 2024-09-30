@@ -83,7 +83,8 @@ const createServer = (data, items) => {
     {
       type: 'add',
       path: 'src/servers/{{kebabCase server}}/healthcheck/healthcheck.controller.ts',
-      templateFile: 'templates/servers/healthcheck/healthcheck.controller.ts.hbs',
+      templateFile:
+        'templates/servers/healthcheck/healthcheck.controller.ts.hbs',
     },
     {
       // Modify .env file
@@ -95,8 +96,8 @@ const createServer = (data, items) => {
       // Modify config.provider file
       type: 'modify',
       path: 'src/providers/config.provider.ts',
-      pattern: 'NODE_ENV: process.env.NODE_ENV,',
-      template: `NODE_ENV: process.env.NODE_ENV,\n  {{constantCase server}}_PORT: Number(process.env.{{constantCase server}}_PORT),`,
+      pattern: '});',
+      template: `  {{constantCase server}}_PORT: port(),\n});`,
     }
   );
 

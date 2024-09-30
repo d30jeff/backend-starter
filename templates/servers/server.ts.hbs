@@ -6,7 +6,7 @@ async function main() {
     name: '{{titleCase server}}',
     controllers,
     origin: [],
-    staticPaths: [ { prefix: '/', path: 'docs/{{kebabCase server}}', enable: config.IS_DEVELOPMENT }],
+    staticPaths: [ { prefix: '/', path: 'docs/{{kebabCase server}}', enabled: config.isDevelopment }],
   });
 
   app.listen(config.{{constantCase server}}_PORT, async () => {
