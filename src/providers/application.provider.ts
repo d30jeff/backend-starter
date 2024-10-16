@@ -96,7 +96,7 @@ export const createApplication = async (
     store: new RedisStore({
       client: redis,
     }),
-    secret: nanoid(255),
+    secret: config.SESSION_SECRET,
     resave: true,
     saveUninitialized: false,
     genid: (request: ExpressRequest) => {

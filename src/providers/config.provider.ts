@@ -9,6 +9,7 @@ export const config = cleanEnv(process.env, {
   }),
   ADMIN_PORT: port(),
   ADMIN_FRONTEND_HOSTNAME: host({}),
+  SESSION_SECRET: str(),
   DATABASE_URL: str(),
   DATABASE_READ_REPLICA_URL: str(),
   REDIS_URL: str(),
