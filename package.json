@@ -1,8 +1,8 @@
 {
   "name": "@deojeff.lai/backend-starter",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "module",
-  "bin": "./bin/cli.js",
+  "bin": "./bin/cli.cjs",
   "scripts": {
     "plop": "cross-env NODE_ENV=development plop --plopfile plopfile.cjs",
     "build": "rimraf dist && tsc && tsc-alias -p tsconfig.json",
