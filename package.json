@@ -1,5 +1,5 @@
 {
-  "name": "@deojeff/backend-starter",
+  "name": "@deojeff.lai/backend-starter",
   "version": "1.0.0",
   "type": "module",
   "bin": "./bin/cli.js",
