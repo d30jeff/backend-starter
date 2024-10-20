@@ -84,7 +84,8 @@ async function prepare(cb) {
       copyTemplateFiles();
       cb();
     } else {
-      console.error('Yarn install failed');
+      console.log(code)
+      console.error('install failed');
     }
   });
 }
