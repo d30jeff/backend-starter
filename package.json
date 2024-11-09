@@ -11,7 +11,8 @@
     "test": "cross-env jest --detectOpenHandles --logHeapUsage",
     "test:coverage": "pnpm run test --coverage",
     "start": "node main.cjs",
-    "prepare": "husky"
+    "prepare": "husky",
+    "release": "pnpm build && pnpm changeset publish"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.27.0",
