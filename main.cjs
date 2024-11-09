@@ -105,7 +105,7 @@ async function main() {
   if (['development', 'dev'].includes(env)) {
     logger.log(`Running ${server} in development mode. \n ${script}`);
     child = spawn(
-      `tsc-watch --noClear --onSuccess "sh -c 'yarn tsc-alias -p tsconfig.json && ${script}'"`,
+      `tsc-watch --noClear --onSuccess "sh -c 'pnpm tsc-alias -p tsconfig.json && ${script}'"`,
       {
         shell: true,
         stdio: 'inherit',

@@ -1,32 +1,8 @@
 export namespace Redis {
   export const Keys: {
-    S3SignedURL: 'S3SignedURL';
-    StripePaymentLink: 'StripePaymentLink';
-    Plans: 'Plans';
-    EmailVerificationRequest: 'EmailVerificationRequest';
-    AccountRecoveryRequest: 'AccountRecoveryRequest';
-    AccountRecoveryCode: 'AccountRecoveryCode';
-    AccountActivation: 'AccountActivation';
-    BusinessAccountActivation: 'BusinessAccountActivation';
-    AdminRecovery: 'AdminRecovery';
-    FedexAccessToken: 'FedexAccessToken';
-    CountryListToken: 'CountryListToken';
-    UPSAccessToken: 'UPSAccessToken';
-    OTPVerificationRequest: 'OTPVerificationRequest';
+    Key: 'Key';
   } = {
-    S3SignedURL: 'S3SignedURL',
-    StripePaymentLink: 'StripePaymentLink',
-    Plans: 'Plans',
-    EmailVerificationRequest: 'EmailVerificationRequest',
-    AccountRecoveryRequest: 'AccountRecoveryRequest',
-    AccountRecoveryCode: 'AccountRecoveryCode',
-    AccountActivation: 'AccountActivation',
-    BusinessAccountActivation: 'BusinessAccountActivation',
-    AdminRecovery: 'AdminRecovery',
-    FedexAccessToken: 'FedexAccessToken',
-    CountryListToken: 'CountryListToken',
-    UPSAccessToken: 'UPSAccessToken',
-    OTPVerificationRequest: 'OTPVerificationRequest',
+    Key: 'Key',
   };
 
   export type Keys = (typeof Keys)[keyof typeof Keys];

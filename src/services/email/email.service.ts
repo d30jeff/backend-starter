@@ -1,7 +1,8 @@
-import { CustomLogger, Logger } from '@/providers/logger.provider.js';
 import { Injectable } from '@decorators/di';
-import { config } from '@/providers/config.provider.js';
 import nodemailer from 'nodemailer';
+
+import { config } from '@/providers/config.provider.js';
+import { CustomLogger, Logger } from '@/providers/logger.provider.js';
 
 @Injectable()
 export class EmailService {
@@ -15,9 +16,9 @@ export class EmailService {
         pass: config.SMTP_PASSWORD,
         user: config.SMTP_USERNAME,
       },
+      from: '',
       host: config.SMTP_HOST_NAME,
       port: Number(config.SMTP_PORT),
-      from: config.SENDER_EMAIL,
     });
   }
 }

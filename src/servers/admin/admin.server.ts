@@ -1,17 +1,18 @@
+import { createApplication } from '@/providers/application.provider.js';
 import { config } from '@/providers/config.provider.js';
 import { controllers } from '@/servers/admin/admin.controllers.js';
-import { createApplication } from '@/providers/application.provider.js';
 
 async function main() {
   const { app, logger } = await createApplication({
-    name: 'Admin',
     controllers,
+    name: 'Admin',
+
     origin: [config.ADMIN_FRONTEND_HOSTNAME],
     staticPaths: [
       {
-        prefix: '/',
-        path: 'docs/admin',
         enabled: config.isProduction === false,
+        path: 'docs/admin',
+        prefix: '/',
       },
     ],
   });
