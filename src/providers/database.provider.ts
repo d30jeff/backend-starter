@@ -3,7 +3,6 @@ import { SignaleLogger } from '@/providers/logger.provider.js';
 import { StringUtil } from '@/utils/string.util.js';
 import { config } from '@/providers/config.provider.js';
 import { generateID } from '@/providers/nanoid.provider.js';
-import { getExternalSignedURL } from '@/utils/response.util.js';
 
 const logger = SignaleLogger('Prisma');
 const log: (Prisma.LogLevel | Prisma.LogDefinition)[] = [
@@ -82,7 +81,6 @@ const middleware = async (params: Prisma.MiddlewareParams, next) => {
   }
 
   const result = await next(params);
-  await getExternalSignedURL(result);
   return result;
 };
 
