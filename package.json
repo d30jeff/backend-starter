@@ -1,6 +1,6 @@
 {
   "name": "@deojeff/backend-starter",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "type": "module",
   "bin": "./bin/cli.cjs",
   "prettier": "@deojeff/configs/prettier/prettier.config.cjs",
